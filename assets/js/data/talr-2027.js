@@ -54,7 +54,7 @@ window.TALR = {
     {
       "value": 900,
       "suffix": "+",
-      "label": "TA leaders engaged",
+      "label": "Past TA leaders engaged",
       "note": "Senior TA and talent leaders across nine editions"
     },
     {
@@ -74,7 +74,7 @@ window.TALR = {
     {
       "number": "01",
       "title": "Connect with TA Leaders Across Industries",
-      "body": "A gathering of Talent Acquisition leaders from diverse industries, offering an opportunity to exchange perspectives, share experiences and engage in meaningful conversations. Build connections with peers, gain fresh perspectives on shared industry challenges and develop relationships that extend well beyond the retreat.",
+      "body": "A gathering of *Talent Acquisition leaders* from diverse industries, offering an opportunity to exchange perspectives, share experiences and engage in meaningful conversations. Build connections with peers, gain fresh perspectives on shared industry challenges and develop relationships that extend well beyond the retreat.",
       "points": []
     },
     {
@@ -370,6 +370,13 @@ window.TALR = {
       "slug": "unstop"
     },
     {
+      "name": "Sage",
+      "logo": "/assets/img/talr/partners/sage.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "sage"
+    },
+    {
       "name": "DoSelect",
       "logo": "/assets/img/logos/partners/doselect.png",
       "role": "Partner",
@@ -545,13 +552,6 @@ window.TALR = {
       "role": "Partner",
       "years": [],
       "slug": "maneshala"
-    },
-    {
-      "name": "Sage",
-      "logo": "/assets/img/talr/partners/sage.png",
-      "role": "Partner",
-      "years": [],
-      "slug": "sage"
     },
     {
       "name": "Zwayam",
@@ -764,13 +764,13 @@ window.TALR = {
       },
       {
         "role": "Education & Knowledge Partners",
-        "line": "Bring your research and expertise to the leaders shaping how India hires. Share insights through sessions and thought leadership.",
+        "line": "Position your institution as a trusted voice in talent and leadership. Share your research and insights with senior TA and HR leaders through sessions and roundtables.",
         "art": "wave",
         "cta": "Start a conversation"
       },
       {
         "role": "Corporate & Lifestyle Experience Partners",
-        "line": "Be part of the experiences senior TA and HR leaders remember. Connect with them through gifting, hospitality, rewards and more.",
+        "line": "Reach the HR and TA leaders who decide what their people get, from health and insurance to wellness, rewards and workplace experiences. Showcase your offering where those decisions begin.",
         "art": "golf",
         "cta": "Shape the experience"
       }
@@ -968,8 +968,8 @@ window.TALR = {
     {
       "type": "quote",
       "quote": "A great experience interacting with TA leaders from across the industry, understanding the strategies they've built for their organisations and the unique challenges they're working through. A very enriching session.",
-      "title": "Talent Acquisition Leader",
-      "label": "TA Dialogues session"
+      "title": "Global Talent Acquisition Leader",
+      "label": "TALR 2021"
     },
     {
       "type": "video",
@@ -984,10 +984,22 @@ window.TALR = {
       "label": "GCC leader on what they take back to India"
     },
     {
+      "type": "video",
+      "src": "/assets/video/talr-voice-3.mp4",
+      "poster": "/assets/video/talr-voice-3.jpg",
+      "label": "Country Head and MD on the GCC leaders' roundtable"
+    },
+    {
       "type": "quote",
       "quote": "My first TA Dialogues leadership roundtable, and a wonderful experience. I got to collaborate with so many leaders, share my thoughts and hear theirs. What I'm taking away will help me transform TA at my end.",
-      "title": "Talent Acquisition Leader",
-      "label": "Global travel company"
+      "title": "Chief People Officer",
+      "label": "TALR 2025"
+    },
+    {
+      "type": "video",
+      "src": "/assets/video/talr-voice-4.mp4",
+      "poster": "/assets/video/talr-voice-4.jpg",
+      "label": "Country Head on the GCC leaders' roundtable"
     }
   ]
 };

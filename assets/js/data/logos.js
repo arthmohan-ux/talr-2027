@@ -690,8 +690,8 @@ window.TAD_LOGOS = {
     {
       "name": "Parkar",
       "src": "/assets/img/logos/partners/parkar.png",
-      "w": 294,
-      "h": 110
+      "w": 360,
+      "h": 115
     },
     {
       "name": "Glider.ai",

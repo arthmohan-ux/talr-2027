@@ -85,7 +85,7 @@
   if (pillars && T.pillars) {
     pillars.innerHTML = T.pillars.map(function (p, i) {
       var pts = p.points || [];
-      return '<article class="pillar" data-reveal style="--d:' + (i * 90) + 'ms"><span class="no">' + esc(p.number) + '</span><h3>' + esc(p.title) + '</h3><p>' + esc(p.body) + '</p>' +
+      return '<article class="pillar" data-reveal style="--d:' + (i * 90) + 'ms"><span class="no">' + esc(p.number) + '</span><h3>' + esc(p.title) + '</h3><p>' + esc(p.body).replace(/\*([^*]+)\*/g, '<em>$1</em>') + '</p>' +
         (p.pointsLead ? '<p class="pl-lead">' + esc(p.pointsLead) + '</p>' : '') +
         (pts.length ? '<ul>' + pts.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '') + '</article>';
     }).join('');
@@ -95,14 +95,17 @@
   var vg = $('[data-voices]');
   if (vg && T.voices) {
     var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-    vg.innerHTML = T.voices.map(function (v, i) {
-      var d = ' data-reveal style="--d:' + ((i % 2) * 90) + 'ms"';
+    var cards = T.voices.map(function (v, i) {
+      var d = ' data-reveal style="--d:' + ((i % 3) * 80) + 'ms"';
       if (v.type === 'video') {
         return '<figure class="vc vc-video"' + d + '><div class="vc-frame"><video preload="none" playsinline poster="' + esc(v.poster) + '" aria-label="' + esc(v.label || 'Testimonial video') + '">' +
           '<source src="' + esc(v.src) + '" type="video/mp4"></video><button class="vc-play" type="button" aria-label="Play video">' + PLAY + '</button></div></figure>';
       }
       return '<figure class="vc vc-quote"' + d + '><blockquote>“' + esc(v.quote) + '”</blockquote><figcaption><b>' + esc(v.title) + '</b>' + (v.label ? '<span>' + esc(v.label) + '</span>' : '') + '</figcaption></figure>';
-    }).join('');
+    });
+    /* Three fixed columns, filled in order (two cards each), so the mix of quotes and videos stays as set in the data */
+    var per = Math.ceil(cards.length / 3);
+    vg.innerHTML = [0, 1, 2].map(function (c) { return '<div class="vcol">' + cards.slice(c * per, c * per + per).join('') + '</div>'; }).join('');
     $$('.vc-video', vg).forEach(function (f) {
       var video = $('video', f), btn = $('.vc-play', f);
       btn.addEventListener('click', function () {

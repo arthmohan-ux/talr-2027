@@ -831,7 +831,6 @@ form .row.one { grid-template-columns: 1fr; }
 .prof-ph .spk-init { font-size: 4rem; }
 
 /* Testimonials: a two-column masonry of written quotes and short videos */
-.vgrid { columns: 2; column-gap: 16px; }
 .vc { break-inside: avoid; margin: 0 0 16px; }
 .vc-quote { padding: clamp(26px, 3vw, 40px); background: var(--paper); border: 1px solid rgba(75, 15, 46, .1); }
 .vc-quote blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.3rem, 1.9vw, 1.6rem); line-height: 1.32; color: var(--plum); }
@@ -844,8 +843,6 @@ form .row.one { grid-template-columns: 1fr; }
 .vc-play svg { width: 28px; height: 28px; margin-left: 4px; fill: currentColor; }
 .vc-play:hover { transform: scale(1.08); background: var(--orange); }
 .vc-video.on .vc-play { display: none; }
-.vgrid .vc:nth-child(2) { margin-top: clamp(0px, 4vw, 56px); }
-@media (max-width: 760px) { .vgrid { columns: 1; } .vgrid .vc:nth-child(2) { margin-top: 0; } .vc-play { width: 60px; height: 60px; } }
 
 /* Ways to partner: icon and heading at the top, text and button at the bottom.
    The cards share rows (subgrid), so headings, text and buttons line up across all three. */
@@ -881,7 +878,7 @@ form .row.one { grid-template-columns: 1fr; }
 
 .rhero.rhero2 { display: block; }
 .rh-card { position: relative; overflow: hidden; background: linear-gradient(165deg, #FFFBF7 0%, var(--champ) 100%); color: var(--ink-soft); box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .55); }
-.rh-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(135deg, rgba(75, 15, 46, .045) 0 1px, transparent 1px 16px); }
+.rh-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(135deg, rgba(75, 15, 46, .022) 0 1px, transparent 1px 22px); }
 .rc-cut { position: absolute; left: 0; top: 0; width: clamp(56px, 7vw, 96px); height: clamp(56px, 7vw, 96px); background: var(--plum); clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 1; }
 .rc-logo { position: relative; display: flex; justify-content: center; padding: clamp(36px, 4.6vw, 60px) clamp(20px, 5vw, 64px) 0; }
 .rc-logo img { width: min(100%, 760px); height: auto; }
@@ -893,7 +890,6 @@ form .row.one { grid-template-columns: 1fr; }
 .rhero2 .seal { width: 100%; filter: drop-shadow(0 18px 28px rgba(75, 15, 46, .32)); }
 
 .rc-metrics { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: linear-gradient(115deg, #6B2241 0%, var(--plum) 45%, #7A2E47 100%); color: var(--champ); overflow: hidden; }
-.rc-metrics::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(135deg, rgba(249, 231, 218, .05) 0 1px, transparent 1px 14px); }
 .rm { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: clamp(24px, 2.8vw, 38px) clamp(18px, 2.2vw, 30px) clamp(26px, 3vw, 40px); }
 .rm + .rm { border-left: 1px solid rgba(249, 231, 218, .12); }
 .rm .ico { display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid rgba(249, 231, 218, .22); background: rgba(249, 231, 218, .08); color: var(--blush); }
@@ -944,3 +940,61 @@ form .row.one { grid-template-columns: 1fr; }
 @media (max-width: 1240px) and (min-width: 901px) { .tnav .nav-tad img { height: 24px; } .tnav .nav-tad { padding-right: 12px; } }
 @media (max-width: 620px) { .tnav .nav-tad img { height: 20px; } .tnav .nav-tad { padding-right: 10px; } }
 @media (max-width: 400px) { .tnav .nav-tad { display: none; } }
+
+/* ===== 12 Nov, afternoon ===== */
+
+/* Lockup: TA Dialogues logo, "Presents" as live upright text, TALR 2027 lockup. Sizes follow the lockup width. */
+.lk-presents { display: flex; flex-direction: column; align-items: center; container-type: inline-size; width: min(100%, 760px); }
+.lk-presents .lk-tad { width: 34.1cqw; height: auto; }
+.lk-presents .lk-p { margin: 1.5cqw 0 .6cqw; font-family: var(--display); font-weight: 700; font-style: normal; font-size: 3.7cqw; line-height: 1; letter-spacing: -0.01em; color: var(--plum); }
+.lk-presents .lk-talr { width: 100%; height: auto; }
+.thero .lk-presents.lockup-presents { width: min(480px, 100%); margin-top: 0; }
+.rc-logo .lk-presents { width: min(100%, 760px); }
+
+/* Form pages on phones: the seal goes small into the card's top right corner */
+@media (max-width: 720px) {
+  .rhero2 .rc-body { position: static; }
+  .rhero2 .rc-body > div { position: relative; }
+  .rhero2 .seal { position: absolute; top: 12px; right: 12px; width: 62px; order: 0; z-index: 2; filter: drop-shadow(0 8px 14px rgba(75, 15, 46, .3)); }
+}
+
+/* Number band: each icon moves its own way when its card is hovered */
+.rm .ico svg { transition: transform .5s var(--ease-out); transform-origin: 50% 50%; }
+.rm:hover .ico { border-color: rgba(228, 106, 19, .7); }
+.rm[data-ic="room"]:hover .ico svg { animation: icBob .9s var(--ease-out); }
+.rm[data-ic="past"]:hover .ico svg { animation: icRewind .9s var(--ease-out); }
+.rm[data-ic="mic"]:hover .ico svg { animation: icPulse 1s ease-in-out; }
+.rm[data-ic="ind"]:hover .ico svg { animation: icRise .8s var(--ease-out); transform-origin: 50% 100%; }
+.rm[data-ic="globe"]:hover .ico svg { animation: icSpin 1.1s var(--ease-out); }
+@keyframes icBob { 0%, 100% { transform: translateY(0); } 30% { transform: translateY(-4px) scale(1.08); } 60% { transform: translateY(1px); } }
+@keyframes icRewind { from { transform: rotate(0); } to { transform: rotate(-360deg); } }
+@keyframes icPulse { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.18); } 50% { transform: scale(.94); } 75% { transform: scale(1.1); } }
+@keyframes icRise { 0% { transform: scaleY(1); } 35% { transform: scaleY(.82) scaleX(1.08); } 70% { transform: scaleY(1.12) translateY(-2px); } 100% { transform: scaleY(1); } }
+@keyframes icSpin { from { transform: perspective(60px) rotateY(0); } to { transform: perspective(60px) rotateY(360deg); } }
+@media (prefers-reduced-motion: reduce) { .rm:hover .ico svg { animation: none !important; } }
+
+/* Testimonials: heading on the left, a compact three-column grid on the right */
+.voices-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+.voices-in .s-head { display: block; margin: 0; position: sticky; top: calc(var(--nav-h) + 32px); }
+.vgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.vcol { display: grid; gap: 14px; }
+.vcol:nth-child(2) { margin-top: clamp(0px, 3vw, 40px); }
+.vgrid .vc { margin: 0; }
+.vc-quote { padding: 22px 22px 20px; }
+.vc-quote blockquote { font-size: clamp(1.08rem, 1.3vw, 1.22rem); line-height: 1.34; }
+.vc-quote figcaption { margin-top: 16px; }
+.vc-quote figcaption b { font-size: .92rem; }
+.vc-quote figcaption span { font-size: .84rem; }
+.vc-play { width: 52px; height: 52px; }
+.vc-play svg { width: 20px; height: 20px; margin-left: 3px; }
+@media (max-width: 1000px) {
+  .voices-in { grid-template-columns: 1fr; }
+  .voices-in .s-head { position: static; }
+}
+@media (max-width: 760px) {
+  .vgrid { grid-template-columns: 1fr; }
+  .vcol:nth-child(2) { margin-top: 0; }
+}
+
+/* Emphasis inside pillar text */
+.pillar > p em { font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 1.12em; color: var(--champ); }

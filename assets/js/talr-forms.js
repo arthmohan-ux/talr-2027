@@ -191,8 +191,12 @@
     var act = -1, list = [], picked = null, lastQ = '';
     var state = { source: '' };
     var render = function () {
-      var q = inp.value.trim().toLowerCase();
-      lastQ = q;
+      var raw = inp.value.trim(), q = raw.toLowerCase();
+      /* A value that was picked or filled in shows the whole list, with that value marked,
+         so the other options are always there to switch to */
+      var showAll = picked && raw === (picked.display || picked.label) && o.items('').length > 0;
+      if (showAll) q = '';
+      lastQ = showAll ? raw.toLowerCase() : q;
       list = o.items(q).slice(0, o.max || 60);
       act = -1;
       if (!list.length) {
@@ -208,6 +212,11 @@
       inp.setAttribute('aria-expanded', 'true');
       inp.removeAttribute('aria-activedescendant');
       box.scrollTop = 0;
+      if (showAll) {
+        var at = -1;
+        list.forEach(function (it, i) { if (at < 0 && it.value === picked.value) at = i; });
+        if (at > -1) mark(at);
+      }
     };
     var close = function () { box.hidden = true; inp.setAttribute('aria-expanded', 'false'); inp.removeAttribute('aria-activedescendant'); act = -1; };
     var mark = function (i) {
