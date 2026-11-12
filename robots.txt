@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://talr.tadialogues.in/sitemap.xml
+Sitemap: https://talr-2027.tadialogues.in/sitemap.xml
