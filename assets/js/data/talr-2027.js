@@ -1,0 +1,993 @@
+/*
+  TALR 2027 content records. Both TALR pages (/events/talr-2027 and /partners) read from this file.
+  Headings and paragraph copy live in the HTML. Lists and records live here.
+
+  event        date, countdown target (startsAtUtc), venue (null shows "Venue to be announced")
+  stats        the four TALR numbers under the hero
+  pillars      "Why TALR is different" cards
+  journey      the 2027 card and every past edition, newest first. Both TALR pages show it as the same
+               sidescroller: photo, year, edition, title. Body, theme, venue and facts stay here for reference.
+               prelude (2016) is kept for reference, not shown.
+  moments      the testimonial carousel on the delegate page (direct: false means paraphrased, shown without quote marks)
+  gallery      photo wall, two rows, no captions on screen (caption + year become the alt text)
+  partners     "Brands that have stood with TALR" and "Partners who've built with us": logos only.
+               role and years stay in the records for reference
+  agenda       arc of the day and the sessions
+  partnerPage  records only the partner page uses. industries = the names circling the orbit
+  forms        form copy: invite-only terms, reply time (sla), done-state text, designation suggestions.
+  industries   the old 42-option industry list, no longer used by the form (the form uses the 18 canonical
+               industries in form-data.js so company picks can fill Industry). Kept for reference.
+  organisations every organisation on record across TALR editions (not shown on the site; kept for reference)
+
+  Speakers live in talr-speakers.js. Platform numbers shared across pages live in platform.js.
+*/
+window.TALR = {
+  "event": {
+    "name": "The TA Leadership Retreat",
+    "shortName": "TALR",
+    "edition": "10th Edition",
+    "editionNumber": 10,
+    "dateLabel": "26 February 2027",
+    "startsAtUtc": "2027-02-26T03:30:00Z",
+    "venue": null,
+    "descriptor": "A curated retreat for TA leaders, CXOs & GCC leaders",
+    "tagline": "Ten Editions. One Evolving Conversation. A Future of Talent Leadership.",
+    "taglineIsFinal": false,
+    "organiser": "TA Dialogues"
+  },
+  "contact": {
+    "email": "connect@tadialogues.in",
+    "phoneDisplay": "+91 95133 50380",
+    "phoneE164": "+919513350380",
+    "linkedin": "https://www.linkedin.com/company/ta-dialogues/",
+    "website": "https://www.tadialogues.in",
+    "privacyPolicyUrl": "/privacy-policy",
+    "termsUrl": null
+  },
+  "stats": [
+    {
+      "value": 9,
+      "suffix": "",
+      "label": "Editions completed",
+      "note": "2017 to 2026, with the 10th edition on 26 February 2027"
+    },
+    {
+      "value": 900,
+      "suffix": "+",
+      "label": "TA leaders engaged",
+      "note": "Senior TA and talent leaders across nine editions"
+    },
+    {
+      "value": 100,
+      "suffix": "+",
+      "label": "Speakers",
+      "note": "CEOs, business heads and TA leaders on the TALR stage"
+    },
+    {
+      "value": 600,
+      "suffix": "+",
+      "label": "Companies engaged",
+      "note": "From GCCs to Fortune 500 enterprises"
+    }
+  ],
+  "pillars": [
+    {
+      "number": "01",
+      "title": "Connect with TA Leaders Across Industries",
+      "body": "A gathering of Talent Acquisition leaders from diverse industries, offering an opportunity to exchange perspectives, share experiences and engage in meaningful conversations. Build connections with peers, gain fresh perspectives on shared industry challenges and develop relationships that extend well beyond the retreat.",
+      "points": []
+    },
+    {
+      "number": "02",
+      "title": "Experiences Beyond the Boardroom",
+      "body": "TALR goes beyond the conventional conference format. Alongside thought-provoking discussions, it brings together experiences designed to foster genuine connections, encourage interaction and create lasting memories. Because the value of the retreat lies not only in the conversations you have, but also in the people you meet and the experiences you share.",
+      "pointsLead": "Experiences from previous editions have included:",
+      "points": [
+        "Exclusive golf experiences",
+        "Curated wellness and rejuvenation sessions",
+        "A range of thoughtfully curated social and recreational experiences"
+      ]
+    },
+    {
+      "number": "03",
+      "title": "Gain Insights from CXO Perspectives",
+      "body": "Hear directly from CXOs and Managing Directors as they share their perspectives on talent strategy, evolving workforce priorities and the changing demands of hiring and retaining talent. Through interactive Q&A sessions, put forward questions that matter to you, exchange perspectives and gain valuable insights from the decision-makers shaping organisational direction.",
+      "points": []
+    }
+  ],
+  "journey": {
+    "next": {
+      "edition": "Edition 10",
+      "date": "26 February 2027",
+      "title": "The 10th Edition",
+      "body": "A milestone a decade in the making. The next conversation starts here."
+    },
+    "chapters": [
+      {
+        "edition": "Edition 9",
+        "year": "2026",
+        "date": "27 February 2026",
+        "venue": "JW Marriott Prestige Golfshire, Bengaluru",
+        "title": "Hire. Fire. Rewire.",
+        "theme": "Redefining the TA leadership playbook for 2026",
+        "body": "The Golf Edition brought two CEO panels and an Industry Roundtable together under a single question: how must the TA leadership playbook be rewritten?",
+        "facts": [
+          "Golf Edition",
+          "Two CEO panels",
+          "Industry Roundtable"
+        ],
+        "image": "/assets/img/photos/talr-2026/mg-5220-1600.jpg"
+      },
+      {
+        "edition": "Edition 8",
+        "year": "2025",
+        "date": "2025",
+        "venue": "The Tamarind Tree, Bengaluru",
+        "title": "A Retreat in Every Sense",
+        "theme": "",
+        "body": "The eighth edition added a wellness layer to the day: a deliberate pause between conversations, and a sign of how the retreat experience keeps evolving.",
+        "facts": [
+          "Wellness experience"
+        ],
+        "image": "/assets/img/talr/journey/talr-2025.webp"
+      },
+      {
+        "edition": "Edition 4",
+        "year": "2021",
+        "date": "29 January 2021",
+        "venue": "Prestige Golfshire, Bengaluru",
+        "title": "A Bold Step Towards a New Normal",
+        "theme": "CEOs' perspectives on the changing face of talent acquisition",
+        "body": "Socially distanced but professionally united: the 2021 retreat was TA Dialogues' first gathering in person of the new normal. 95% of delegates said they would attend again.",
+        "facts": [
+          "40+ companies",
+          "Golf Edition"
+        ],
+        "image": "/assets/img/talr/journey/talr-2021.webp"
+      },
+      {
+        "edition": "Edition 3",
+        "year": "2020",
+        "date": "17 January 2020",
+        "venue": "Prestige Golfshire, Bengaluru",
+        "title": "TA in the Boardroom, Revisited",
+        "theme": "TA in the Boardroom: CEOs' perspective",
+        "body": "A room of 60+ TA heads. Business leaders from TCS, ANZ, Infosys BPM and Standard Chartered GBS shared what they expect from TA, and what TA must bring to earn its seat at the table.",
+        "facts": [
+          "60+ TA heads",
+          "50+ companies"
+        ],
+        "image": "/assets/img/talr/journey/talr-2020.webp"
+      },
+      {
+        "edition": "Edition 2",
+        "year": "2019",
+        "date": "18 January 2019",
+        "venue": "Prestige Golfshire, Bengaluru",
+        "title": "The Future of Talent Acquisition",
+        "theme": "CEOs' perspectives on the future of talent acquisition",
+        "body": "Fire @ the CEO took the stage: TA heads put prepared and impromptu questions directly to CEOs.",
+        "facts": [
+          "50 TA heads",
+          "Fire @ the CEO"
+        ],
+        "image": "/assets/img/talr/journey/talr-2019.webp"
+      },
+      {
+        "edition": "Edition 1",
+        "year": "2017",
+        "date": "8 September 2017",
+        "venue": "Prestige Golfshire, Bengaluru",
+        "title": "TA in the Boardroom",
+        "theme": "How should CTAOs drive decisions for the CXO table?",
+        "body": "The first retreat paired a CEO Roundtable with a TA Roundtable, so the people who bring in talent could hear first hand how the board sees it. Then the conversation moved out to the golf greens.",
+        "facts": [
+          "100 TA heads",
+          "CEO Roundtable + TA Roundtable",
+          "Golf on the greens"
+        ],
+        "image": "/assets/img/talr/journey/talr-2017.webp"
+      }
+    ],
+    "prelude": {
+      "year": "2016",
+      "title": "Where the conversation began",
+      "body": "TA Dialogues started in September 2016 as the Recruiters' Breakfast Series, a small morning gathering of recruiters and TA specialists. It grew into India's largest platform for the talent acquisition function, and TALR became its flagship."
+    }
+  },
+  "moments": [
+    {
+      "quote": "This was a panel discussion followed by a fireside chat that highlighted insights and methodologies that are relevant, carry enterprise value and, most importantly, put the Talent Partners at the epicentre of this transformation journey.",
+      "by": "Sweety Rath",
+      "context": "Moderator, 2021",
+      "direct": true
+    },
+    {
+      "quote": "Credibility, culture, commitment and compassion: the four C's that tie TA to the business.",
+      "by": "Mukul Ghosh",
+      "context": "Global VP, Aspect Software, 2021, as reported",
+      "direct": false
+    },
+    {
+      "quote": "Culture and employer branding are a collective responsibility, not the job of one function alone.",
+      "by": "CEO panel consensus",
+      "context": "Fire @ the CEO, 2019, as reported",
+      "direct": false
+    }
+  ],
+  "gallery": [
+    {
+      "image": "/assets/img/talr/gallery/talr-2020-01.webp",
+      "caption": "The 2020 room at Prestige Golfshire",
+      "year": 2020,
+      "aspect": 1.5,
+      "w": 1536,
+      "h": 1024
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2017-02.webp",
+      "caption": "Golf on the greens",
+      "year": 2017,
+      "aspect": 1.5,
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2020-03.webp",
+      "caption": "TA in the Boardroom, CEO panel",
+      "year": 2020,
+      "aspect": 1.5,
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2019-04.webp",
+      "caption": "Golf clinic",
+      "year": 2019,
+      "aspect": 0.709,
+      "w": 1135,
+      "h": 1600
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2021-05.webp",
+      "caption": "Socially distanced, professionally united",
+      "year": 2021,
+      "aspect": 1.5,
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2020-06.webp",
+      "caption": "Between sessions",
+      "year": 2020,
+      "aspect": 1.5,
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2021-07.webp",
+      "caption": "Conversations under the canopy",
+      "year": 2021,
+      "aspect": 1.5,
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2020-08.webp",
+      "caption": "Golf clinic",
+      "year": 2020,
+      "aspect": 2.222,
+      "w": 1600,
+      "h": 720
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2021-09.webp",
+      "caption": "On stage",
+      "year": 2021,
+      "aspect": 0.667,
+      "w": 1067,
+      "h": 1600
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2019-10.webp",
+      "caption": "Arrivals",
+      "year": 2019,
+      "aspect": 1.298,
+      "w": 1286,
+      "h": 991
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2020-11.webp",
+      "caption": "Speakers 2020",
+      "year": 2020,
+      "aspect": 2.222,
+      "w": 1600,
+      "h": 720
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2021-12.webp",
+      "caption": "Golf clinic",
+      "year": 2021,
+      "aspect": 1.5,
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2021-13.webp",
+      "caption": "Golf clinic",
+      "year": 2021,
+      "aspect": 1.5,
+      "w": 1200,
+      "h": 800
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2020-14.webp",
+      "caption": "Speaker recognition",
+      "year": 2020,
+      "aspect": 1.5,
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2021-15.webp",
+      "caption": "In conversation",
+      "year": 2021,
+      "aspect": 0.667,
+      "w": 800,
+      "h": 1200
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2020-16.webp",
+      "caption": "CEO panel",
+      "year": 2020,
+      "aspect": 1.5,
+      "w": 1600,
+      "h": 1067
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2021-17.webp",
+      "caption": "Peer conversations",
+      "year": 2021,
+      "aspect": 1.5,
+      "w": 1200,
+      "h": 800
+    },
+    {
+      "image": "/assets/img/talr/gallery/talr-2019-18.webp",
+      "caption": "On the course",
+      "year": 2019,
+      "aspect": 1.149,
+      "w": 1600,
+      "h": 1393
+    }
+  ],
+  "partners": [
+    {
+      "name": "Unstop",
+      "logo": "/assets/img/logos/partners/unstop.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "unstop"
+    },
+    {
+      "name": "DoSelect",
+      "logo": "/assets/img/logos/partners/doselect.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "doselect"
+    },
+    {
+      "name": "Peepal Consulting",
+      "logo": "/assets/img/logos/partners/peepal.png",
+      "role": "Partner",
+      "years": [
+        2019,
+        2020,
+        2021
+      ],
+      "slug": "peepal-consulting"
+    },
+    {
+      "name": "Recruitment Bricks",
+      "logo": "/assets/img/logos/partners/recruitment-bricks.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "recruitment-bricks"
+    },
+    {
+      "name": "HireWithLumi",
+      "logo": "/assets/img/logos/partners/hirewithlumi.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "hirewithlumi"
+    },
+    {
+      "name": "Parkar",
+      "logo": "/assets/img/logos/partners/parkar.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "parkar"
+    },
+    {
+      "name": "Prismforce",
+      "logo": "/assets/img/talr/partners/prismforce.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "prismforce"
+    },
+    {
+      "name": "Glider.ai",
+      "logo": "/assets/img/logos/partners/glider-ai.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "glider-ai"
+    },
+    {
+      "name": "Param.ai",
+      "logo": "/assets/img/logos/partners/param-ai.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "param-ai"
+    },
+    {
+      "name": "Ceipal",
+      "logo": "/assets/img/logos/partners/ceipal.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "ceipal"
+    },
+    {
+      "name": "Shenzyn",
+      "logo": "/assets/img/logos/partners/shenzyn.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "shenzyn"
+    },
+    {
+      "name": "RippleHire",
+      "logo": "/assets/img/logos/partners/ripplehire.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "ripplehire"
+    },
+    {
+      "name": "Callify.ai",
+      "logo": "/assets/img/logos/partners/callify-ai.png",
+      "role": "Platinum Sponsor",
+      "years": [
+        2021
+      ],
+      "slug": "callify-ai"
+    },
+    {
+      "name": "Skillenza",
+      "logo": "/assets/img/logos/partners/skillenza.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "skillenza"
+    },
+    {
+      "name": "ALD Automotive",
+      "logo": "/assets/img/logos/partners/ald-automotive.png",
+      "role": "Platinum Sponsor",
+      "years": [
+        2019
+      ],
+      "slug": "ald-automotive"
+    },
+    {
+      "name": "Visume",
+      "logo": "/assets/img/logos/partners/visume.png",
+      "role": "Platinum Sponsor",
+      "years": [
+        2020
+      ],
+      "slug": "visume"
+    },
+    {
+      "name": "iGauge",
+      "logo": "/assets/img/logos/partners/igauge.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "igauge"
+    },
+    {
+      "name": "Kaamwork",
+      "logo": "/assets/img/logos/partners/kaamwork.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "kaamwork"
+    },
+    {
+      "name": "SuperHire",
+      "logo": "/assets/img/logos/partners/superhire.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "superhire"
+    },
+    {
+      "name": "Pink Lemonade",
+      "logo": "/assets/img/logos/partners/pink-lemonade.png",
+      "role": "Digital Outreach Partner",
+      "years": [
+        2019
+      ],
+      "slug": "pink-lemonade"
+    },
+    {
+      "name": "Thomas Assessments",
+      "logo": "/assets/img/logos/partners/thomas.png",
+      "role": "Gold Sponsor",
+      "years": [
+        2019
+      ],
+      "slug": "thomas-assessments"
+    },
+    {
+      "name": "AiRoHire",
+      "logo": "/assets/img/logos/partners/airohire.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "airohire"
+    },
+    {
+      "name": "Hyreo",
+      "logo": "/assets/img/logos/partners/hyreo.png",
+      "role": "Silver Sponsor",
+      "years": [
+        2020
+      ],
+      "slug": "hyreo"
+    },
+    {
+      "name": "Maneshala",
+      "logo": "/assets/img/logos/partners/maneshala.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "maneshala"
+    },
+    {
+      "name": "Sage",
+      "logo": "/assets/img/talr/partners/sage.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "sage"
+    },
+    {
+      "name": "Zwayam",
+      "logo": "/assets/img/talr/partners/zwayam.png",
+      "role": "Partner",
+      "years": [],
+      "slug": "zwayam"
+    },
+    {
+      "name": "Reckrut",
+      "logo": "/assets/img/talr/partners/reckrut.png",
+      "role": "Gold Sponsor",
+      "years": [
+        2019
+      ],
+      "slug": "reckrut"
+    }
+  ],
+  "agenda": {
+    "arc": [
+      {
+        "code": "SIGNAL",
+        "line": "Read the shifts in the talent landscape."
+      },
+      {
+        "code": "SYNC",
+        "line": "Get candid about what's coming next."
+      },
+      {
+        "code": "STEER",
+        "line": "Shape the playbook together for the course ahead."
+      }
+    ],
+    "sessions": [
+      {
+        "time": "9:30 AM",
+        "endTime": "10:00 AM",
+        "kind": "session",
+        "label": "Keynote",
+        "title": "Opening keynote",
+        "desc": "Speaker to be announced."
+      },
+      {
+        "time": "10:00 AM",
+        "endTime": "11:15 AM",
+        "kind": "panel",
+        "label": "Panel 1",
+        "code": "SIGNAL",
+        "title": "C-Suite Leaders’ Perspectives: The New Talent Standard",
+        "desc": "Shifts in the talent landscape, and what they point to."
+      },
+      {
+        "time": "11:15 AM",
+        "endTime": "11:45 AM",
+        "kind": "break",
+        "title": "Networking break"
+      },
+      {
+        "time": "11:45 AM",
+        "endTime": "1:00 PM",
+        "kind": "panel",
+        "label": "Panel 2",
+        "code": "SYNC",
+        "title": "Fire at the C-Suite: Where Are We Headed",
+        "desc": "A candid Q&A with TA leaders on how they should approach what’s coming next."
+      },
+      {
+        "time": "1:00 PM",
+        "endTime": "2:00 PM",
+        "kind": "break",
+        "title": "Lunch"
+      },
+      {
+        "time": "2:00 PM",
+        "endTime": "2:45 PM",
+        "kind": "experience",
+        "label": "Experience",
+        "title": "The Retreat Experience",
+        "desc": "Step away from the room, and connect differently."
+      },
+      {
+        "time": "2:45 PM",
+        "endTime": "3:00 PM",
+        "kind": "break",
+        "title": "Break"
+      },
+      {
+        "time": "3:00 PM",
+        "endTime": "4:00 PM",
+        "kind": "panel",
+        "label": "Roundtables",
+        "code": "STEER",
+        "title": "TA Leaders’ Industry Roundtables",
+        "desc": "Co-creating the industry playbooks for the course ahead.",
+        "note": "Running alongside: fireside chats and podcast recordings."
+      },
+      {
+        "time": "4:00 PM",
+        "endTime": "5:00 PM",
+        "kind": "session",
+        "label": "To be announced",
+        "title": "One more conversation",
+        "desc": "Revealed closer to the day."
+      },
+      {
+        "time": "5:00 PM",
+        "endTime": "onwards",
+        "kind": "break",
+        "title": "High tea and networking"
+      }
+    ]
+  },
+  "partnerPage": {
+    "roles": [
+      "CEOs",
+      "Talent Strategy Leaders",
+      "MDs",
+      "CHROs",
+      "Founders",
+      "TA Directors & VPs",
+      "GCC Talent Leaders",
+      "Global Heads of TA"
+    ],
+    "forms": {
+      "eventKey": "TALR 2027",
+      "attend": {
+        "terms": "TALR is by invitation. Submitting your interest does not confirm a seat. Seats are offered on the relevance of a leader's experience, role and contribution to the conversation.",
+        "sla": "within 3 working days",
+        "done": "Our team reviews every request personally. If your profile is a fit, we will reach out to confirm eligibility and next steps."
+      },
+      "partner": {
+        "terms": "Partner places are deliberately limited. Every partnership is shaped with you, and confirmed only once we agree on a brief.",
+        "sla": "within 48 hours",
+        "done": "Our partnerships team will come back with a brief built around your goals."
+      },
+      "featuredQuestion": "Would you be open to being featured in TALR's marketing on LinkedIn and other platforms?",
+      "attendDesignations": [
+        "CEO / Managing Director",
+        "Founder / Co-founder",
+        "CHRO / Chief People Officer",
+        "CXO",
+        "Business Head",
+        "GCC Site Leader / Country Head",
+        "Global Head of Talent Acquisition",
+        "Head of Talent Acquisition",
+        "VP / AVP Talent Acquisition",
+        "Director, Talent Acquisition",
+        "Senior Manager, Talent Acquisition",
+        "Head of HR",
+        "Talent Strategy Leader",
+        "Employer Branding Lead"
+      ],
+      "partnerDesignations": [
+        "CEO / Managing Director",
+        "Founder / Co-founder",
+        "CXO",
+        "VP / Head of Sales",
+        "Head of Marketing",
+        "Partnerships / Alliances Lead",
+        "Business Development Lead",
+        "Product Leader",
+        "Customer Success Leader",
+        "HR / TA Leader"
+      ]
+    },
+    "industries": [
+      "IT Services & Consulting",
+      "IT Products & SaaS",
+      "BFSI / GBS",
+      "Pharma & Life Sciences",
+      "Manufacturing & Engineering",
+      "Semiconductor",
+      "Telecom",
+      "Consumer, Retail & Ecommerce",
+      "Professional Services"
+    ],
+    "why": [
+      {
+        "title": "Direct access to decision-makers",
+        "problem": "Skip the gatekeepers.",
+        "outcome": "Meet the TA leaders, CHROs and C-suite who decide on hiring and business investments, and showcase your offering through booths and one-on-one conversations."
+      },
+      {
+        "title": "A seat in the conversation",
+        "problem": "Add your voice to the conversation.",
+        "outcome": "Contribute your expertise through knowledge-sharing sessions and industry roundtables, alongside senior practitioners."
+      },
+      {
+        "title": "Relationships that last",
+        "problem": "Fewer cold emails, warmer conversations.",
+        "outcome": "Curated networking and relaxed, shared experiences turn introductions into lasting professional connections that continue well after the event."
+      },
+      {
+        "title": "Credibility that carries",
+        "problem": "Be known before the first conversation.",
+        "outcome": "Put your brand in an exclusive room backed by TA Dialogues, India’s most trusted TA community, with 10 years and a 150K+ network behind it."
+      },
+      {
+        "title": "Reach beyond the room",
+        "problem": "Visibility before, during and after the day.",
+        "outcome": "Be introduced through the pre-event campaign, seen through your booth, sessions and venue branding on the day, and remembered through post-event coverage."
+      }
+    ],
+    "ways": [
+      {
+        "role": "TA & HR Tech Partners",
+        "line": "Put your solution in front of the TA leaders, CHROs and C-suite who evaluate and choose it.",
+        "art": "conversation",
+        "cta": "Explore a partnership"
+      },
+      {
+        "role": "Education & Knowledge Partners",
+        "line": "Bring your research and expertise to the leaders shaping how India hires. Share insights through sessions and thought leadership.",
+        "art": "wave",
+        "cta": "Start a conversation"
+      },
+      {
+        "role": "Corporate & Lifestyle Experience Partners",
+        "line": "Be part of the experiences senior TA and HR leaders remember. Connect with them through gifting, hospitality, rewards and more.",
+        "art": "golf",
+        "cta": "Shape the experience"
+      }
+    ],
+    "quotes": [
+      "An insightful experience that brought together meaningful conversations, diverse perspectives, and ideas for the future.",
+      "The discussions offered practical insights and fresh perspectives on how technology is reshaping Talent Acquisition.",
+      "A valuable platform to exchange ideas, explore new perspectives, and rethink the future of Talent Acquisition.",
+      "The conversations were candid, insightful, and gave me perspectives I could take back to my organisation.",
+      "Really enjoyed the diverse perspectives and breadth of the conversation, along with the openness of the room."
+    ],
+    "formSuccess": "Thank you, our partnerships team will reach out within 48 hours with a brief built around your goals.",
+    "partnershipsContact": {
+      "email": "events@tadialogues.in",
+      "phone": "+91 90710 14575"
+    }
+  },
+  "forms": {
+    "eventKey": "TALR 2027",
+    "attend": {
+      "terms": "TALR is by invitation. Submitting your interest does not confirm a seat. Seats are offered on the relevance of a leader's experience, role and contribution to the conversation.",
+      "sla": "within 3 working days",
+      "done": "Our team reviews every request personally. If your profile is a fit, we will reach out to confirm eligibility and next steps."
+    },
+    "partner": {
+      "terms": "Partner places are deliberately limited. Every partnership is shaped with you, and confirmed only once we agree on a brief.",
+      "sla": "within 48 hours",
+      "done": "Our partnerships team will come back with a brief built around your goals."
+    },
+    "featuredQuestion": "Would you be open to being featured in TALR's marketing on LinkedIn and other platforms?",
+    "attendDesignations": [
+      "CEO / Managing Director",
+      "Founder / Co-founder",
+      "CHRO / Chief People Officer",
+      "CXO",
+      "Business Head",
+      "GCC Site Leader / Country Head",
+      "Global Head of Talent Acquisition",
+      "Head of Talent Acquisition",
+      "VP / AVP Talent Acquisition",
+      "Director, Talent Acquisition",
+      "Senior Manager, Talent Acquisition",
+      "Head of HR",
+      "Talent Strategy Leader",
+      "Employer Branding Lead"
+    ],
+    "partnerDesignations": [
+      "CEO / Managing Director",
+      "Founder / Co-founder",
+      "CXO",
+      "VP / Head of Sales",
+      "Head of Marketing",
+      "Partnerships / Alliances Lead",
+      "Business Development Lead",
+      "Product Leader",
+      "Customer Success Leader",
+      "HR / TA Leader"
+    ]
+  },
+  "industries": [
+    "Aerospace & Defence",
+    "Agriculture & Agritech",
+    "Automotive",
+    "Aviation",
+    "Banking",
+    "BFSI",
+    "BPM / ITES",
+    "Chemicals",
+    "Construction & Infrastructure",
+    "Consulting & Professional Services",
+    "Consumer Goods / FMCG",
+    "Ecommerce",
+    "Education & EdTech",
+    "Electronics & Hardware",
+    "Energy & Utilities",
+    "Engineering & R&D Services",
+    "Financial Services",
+    "Fintech",
+    "Gaming",
+    "GCC / Global Capability Centre",
+    "Government & Public Sector",
+    "Healthcare",
+    "Hospitality & Travel",
+    "Insurance",
+    "IT Services",
+    "Legal Services",
+    "Logistics & Supply Chain",
+    "Manufacturing",
+    "Media & Entertainment",
+    "Metals & Mining",
+    "Nonprofit",
+    "Oil & Gas",
+    "Pharma & Life Sciences",
+    "Real Estate",
+    "Renewable Energy",
+    "Retail",
+    "Semiconductors",
+    "Software / SaaS",
+    "Staffing & Recruitment",
+    "Telecom",
+    "Textiles & Apparel",
+    "Other"
+  ],
+  "organisations": [
+    "Accel",
+    "Accenture",
+    "Accion Labs",
+    "Akamai",
+    "Alorica",
+    "ANZ",
+    "AQR",
+    "Arcesium",
+    "Aristocrat",
+    "Aspect Software",
+    "Attra",
+    "AXA",
+    "Axiscades",
+    "Bajaj Capital",
+    "Blue Yonder",
+    "BusinessOne",
+    "Capillary",
+    "CGI",
+    "Ciber",
+    "Cigniti",
+    "Citrix",
+    "Conneqt",
+    "Convergytics",
+    "Course5",
+    "Danske IT",
+    "Dassault",
+    "DBS",
+    "Deloitte",
+    "Diageo",
+    "EdgeVerve",
+    "EY",
+    "Gallagher",
+    "GE",
+    "Gibraltar",
+    "Goldman Sachs",
+    "HCL",
+    "HGS",
+    "Hitachi Vantara",
+    "IBM",
+    "IHS Markit",
+    "Indegene",
+    "InfoCepts",
+    "Informatica",
+    "Infosys BPM",
+    "Innovatia",
+    "Inspirage",
+    "JCPenney",
+    "JPMorgan Chase & Co.",
+    "Kmart (KAS Services)",
+    "Koch",
+    "Lowe's",
+    "MaxVal IP",
+    "MetricStream",
+    "Microland",
+    "Mindtree",
+    "Molex",
+    "Morgan Stanley",
+    "Narayana Health",
+    "NESS",
+    "NextGen Healthcare",
+    "Northern Trust",
+    "NTT Data",
+    "Oracle",
+    "Performation Consulting",
+    "Qualcomm",
+    "Sapient",
+    "Scientific Games",
+    "Seven Lakes",
+    "Shell",
+    "Shenzyn",
+    "Siemens",
+    "Societe Generale",
+    "Standard Chartered",
+    "State Street",
+    "Steer Engineering",
+    "Swiss Re",
+    "Tata Consultancy Services",
+    "Tata Insights",
+    "TE Connectivity",
+    "TiVo",
+    "Uber",
+    "Volvo",
+    "Walmart Labs",
+    "Webtec",
+    "Wooqer",
+    "Xiaomi",
+    "Xperi",
+    "Xylem"
+  ],
+  "voices": [
+    {
+      "type": "quote",
+      "quote": "A great experience interacting with TA leaders from across the industry, understanding the strategies they've built for their organisations and the unique challenges they're working through. A very enriching session.",
+      "title": "Talent Acquisition Leader",
+      "label": "TA Dialogues session"
+    },
+    {
+      "type": "video",
+      "src": "/assets/video/talr-voice-1.mp4",
+      "poster": "/assets/video/talr-voice-1.jpg",
+      "label": "GCC leader on what stood out from the room"
+    },
+    {
+      "type": "video",
+      "src": "/assets/video/talr-voice-2.mp4",
+      "poster": "/assets/video/talr-voice-2.jpg",
+      "label": "GCC leader on what they take back to India"
+    },
+    {
+      "type": "quote",
+      "quote": "My first TA Dialogues leadership roundtable, and a wonderful experience. I got to collaborate with so many leaders, share my thoughts and hear theirs. What I'm taking away will help me transform TA at my end.",
+      "title": "Talent Acquisition Leader",
+      "label": "Global travel company"
+    }
+  ]
+};
