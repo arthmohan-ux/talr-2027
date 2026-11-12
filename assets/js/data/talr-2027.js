@@ -10,7 +10,7 @@
                prelude (2016) is kept for reference, not shown.
   moments      the testimonial carousel on the delegate page (direct: false means paraphrased, shown without quote marks)
   gallery      photo wall, two rows, no captions on screen (caption + year become the alt text)
-  partners     "Brands that have stood with TALR" and "Partners who've built with us": logos only.
+  partners     "Brands that have stood with TA Dialogues" and "Partners who've built with us": logos only.
                role and years stay in the records for reference
   agenda       arc of the day and the sessions
   partnerPage  records only the partner page uses. industries = the names circling the orbit
