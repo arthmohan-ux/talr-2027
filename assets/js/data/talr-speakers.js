@@ -22,6 +22,38 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/logos/attendees/infosys.png"
   },
   {
+    "id": "amit-sharma",
+    "name": "Amit Sharma",
+    "designation": "Managing Partner, Global Delivery",
+    "organisation": "IBM Consulting",
+    "photo": "/assets/img/talr/speakers/amit-sharma.webp",
+    "bio": "Leads IBM Consulting's innovation and delivery centres, over 110,000 consultants in 38 countries. Member of IBM's top 300 executive leadership team since 2008.",
+    "appearances": [
+      {
+        "year": 2024,
+        "session": "Fire @ the CEO",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/attendees/ibm.png"
+  },
+  {
+    "id": "arindam-banerrji",
+    "name": "Arindam Banerrji",
+    "designation": "EVP & Managing Director",
+    "organisation": "Wells Fargo India & Philippines",
+    "photo": "/assets/img/talr/speakers/arindam-banerrji.webp",
+    "bio": "Leads Wells Fargo in India and the Philippines, and believes people are the pulse of any organisation.",
+    "appearances": [
+      {
+        "year": 2022,
+        "session": "Fire @ the CEO",
+        "role": "Panellist"
+      }
+    ],
+    "logo": null
+  },
+  {
     "id": "amit-nehra",
     "name": "Amit Nehra",
     "designation": "Managing Director",
@@ -65,6 +97,11 @@ window.TALR_SPEAKERS = [
         "year": 2026,
         "session": "Hire. Fire. Rewire.",
         "role": "Speaker"
+      },
+      {
+        "year": 2022,
+        "session": "Fire @ the CEO",
+        "role": "Panellist"
       }
     ],
     "logo": "/assets/img/logos/attendees/thomson-reuters.png"
@@ -86,6 +123,22 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/talr/speaker-logos/lowes-india.png"
   },
   {
+    "id": "jayashree-easwaran",
+    "name": "Jayashree Easwaran",
+    "designation": "Managing Director",
+    "organisation": "Diageo Business Services India",
+    "photo": "/assets/img/talr/speakers/jayashree-easwaran.webp",
+    "bio": "A Chartered Accountant who moved from Finance Director at HP to Diageo, becoming Managing Director of Diageo Business Services India in 2021.",
+    "appearances": [
+      {
+        "year": 2023,
+        "session": "CEOs' Expectations from a Strategic TA Leader",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/attendees/diageo.png"
+  },
+  {
     "id": "venkataraman-sv",
     "name": "Venkataraman S V",
     "designation": "Managing Director",
@@ -100,6 +153,70 @@ window.TALR_SPEAKERS = [
       }
     ],
     "logo": "/assets/img/logos/attendees/anz.png"
+  },
+  {
+    "id": "muthukumar-m",
+    "name": "Muthukumar M",
+    "designation": "Group VP, Engineering & Managing Director",
+    "organisation": "Juniper Networks India",
+    "photo": "/assets/img/talr/speakers/muthukumar-m.webp",
+    "bio": "Set up Juniper's India Excellence Center and has led its growth for nearly two decades.",
+    "appearances": [
+      {
+        "year": 2023,
+        "session": "Great Resignation. Great Rehire. Great Recession.",
+        "role": "Panellist"
+      }
+    ],
+    "logo": null
+  },
+  {
+    "id": "chetan-garga",
+    "name": "Chetan Garga",
+    "designation": "Former MD & Country Head, India",
+    "organisation": "Allstate India",
+    "photo": "/assets/img/talr/speakers/chetan-garga.webp",
+    "bio": "Over 30 years across technology, operations, finance, HR and risk. Recognised by Great Place to Work as one of India's Best Leaders in Times of Crisis.",
+    "appearances": [
+      {
+        "year": 2024,
+        "session": "CEOs' Insights on Reimagining TA Strategies",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/attendees/allstate.png"
+  },
+  {
+    "id": "vikram-nanwani",
+    "name": "Vikram Nanwani",
+    "designation": "Managing Director, India Technology Center",
+    "organisation": "Xylem Inc.",
+    "photo": "/assets/img/talr/speakers/vikram-nanwani.webp",
+    "bio": "17+ years of experience, leading a team of 200+ engineers across two campuses in mechanical, electrical, electronics and software domains.",
+    "appearances": [
+      {
+        "year": 2019,
+        "session": "Fire @ the CEO: TA Wants to Know",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/talr/speaker-logos/xylem.png"
+  },
+  {
+    "id": "manoj-nagpal",
+    "name": "Manoj Nagpal",
+    "designation": "Managing Director & VP, Professional Services",
+    "organisation": "OpenText India",
+    "photo": "/assets/img/talr/speakers/manoj-nagpal.webp",
+    "bio": "30+ years across sales, customer success and general management. Leads a 1,000-person Professional Services Centre of Excellence serving OpenText customers worldwide.",
+    "appearances": [
+      {
+        "year": 2025,
+        "session": "The Hiring Disconnect: Unfiltered Insights from the C-Suite",
+        "role": "Panellist"
+      }
+    ],
+    "logo": null
   },
   {
     "id": "soumitra-saha",
@@ -134,6 +251,22 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/talr/speaker-logos/sabre.png"
   },
   {
+    "id": "mukta-arora",
+    "name": "Mukta Arora",
+    "designation": "Former Managing Director",
+    "organisation": "Elanco",
+    "photo": "/assets/img/talr/speakers/mukta-arora.webp",
+    "bio": "Over 30 years in life sciences across India and Europe. Founding Partner, Board Director and MD at Elanco, previously with Eli Lilly's GCC.",
+    "appearances": [
+      {
+        "year": 2025,
+        "session": "The Hiring Disconnect: Unfiltered Insights from the C-Suite",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/attendees/elanco.png"
+  },
+  {
     "id": "james-favors",
     "name": "James Favors",
     "designation": "Managing Director",
@@ -166,6 +299,22 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/talr/speaker-logos/kas-services-india.png"
   },
   {
+    "id": "anand-kadur",
+    "name": "Anand Kadur",
+    "designation": "Managing Director",
+    "organisation": "IG Group",
+    "photo": "/assets/img/talr/speakers/anand-kadur.webp",
+    "bio": "Over 24 years across professional services, support, R&D and business development, having worked in the US, South America, Africa and APAC.",
+    "appearances": [
+      {
+        "year": 2024,
+        "session": "Fire @ the CEO",
+        "role": "Panellist"
+      }
+    ],
+    "logo": null
+  },
+  {
     "id": "girish-kamath",
     "name": "Girish Kamath",
     "designation": "Vice President & Managing Director",
@@ -180,6 +329,102 @@ window.TALR_SPEAKERS = [
       }
     ],
     "logo": "/assets/img/talr/speaker-logos/scientific-games.png"
+  },
+  {
+    "id": "rohit-aradhya",
+    "name": "Rohit Aradhya",
+    "designation": "VP Engineering & Managing Director",
+    "organisation": "Barracuda Networks India",
+    "photo": "/assets/img/talr/speakers/rohit-aradhya.webp",
+    "bio": "",
+    "appearances": [
+      {
+        "year": 2026,
+        "session": "Hire. Fire. Rewire.",
+        "role": "Speaker"
+      }
+    ],
+    "logo": "/assets/img/talr/speaker-logos/barracuda-networks.png"
+  },
+  {
+    "id": "shalini-sankarshana",
+    "name": "Shalini Sankarshana",
+    "designation": "Managing Director & Country Manager",
+    "organisation": "Planview India",
+    "photo": "/assets/img/talr/speakers/shalini-sankarshana.webp",
+    "bio": "Nearly 25 years building enterprise platforms. A voice in the GCC and startup ecosystem who has contributed to NASSCOM's product skilling and diversity work.",
+    "appearances": [
+      {
+        "year": 2025,
+        "session": "The Hiring Disconnect: Unfiltered Insights from the C-Suite",
+        "role": "Panellist"
+      }
+    ],
+    "logo": null
+  },
+  {
+    "id": "sandeep-sharma",
+    "name": "Sandeep Sharma",
+    "designation": "Managing Director & SVP",
+    "organisation": "RealPage India",
+    "photo": "/assets/img/talr/speakers/sandeep-sharma.webp",
+    "bio": "Over 24 years across global delivery, operations and consulting in services and GCCs. Chairs the GCC Council for Telangana & AP and sits on the NASSCOM National GCC Council.",
+    "appearances": [
+      {
+        "year": 2022,
+        "session": "Hitting Refresh in Talent Acquisition",
+        "role": "Panellist"
+      }
+    ],
+    "logo": null
+  },
+  {
+    "id": "chandradip-dass",
+    "name": "Chandradip Dass",
+    "designation": "Managing Director, India & SVP, R&D",
+    "organisation": "NextGen Healthcare",
+    "photo": "/assets/img/talr/speakers/chandradip-dass.webp",
+    "bio": "A healthcare product veteran with leadership roles at Philips, Allscripts, Misys and GE, focused on growing global product and services ownership out of India.",
+    "appearances": [
+      {
+        "year": 2022,
+        "session": "Hitting Refresh in Talent Acquisition",
+        "role": "Panellist"
+      }
+    ],
+    "logo": null
+  },
+  {
+    "id": "venkataramana-g",
+    "name": "Venkataramana G",
+    "designation": "Managing Director & Country Head",
+    "organisation": "Homag India",
+    "photo": "/assets/img/talr/speakers/venkataramana-g.webp",
+    "bio": "31 years across P&L management, factory operations and strategic sourcing in global locations, with a collaborative, inclusive style of leadership.",
+    "appearances": [
+      {
+        "year": 2022,
+        "session": "Hitting Refresh in Talent Acquisition",
+        "role": "Panellist"
+      }
+    ],
+    "logo": null
+  },
+  {
+    "id": "pancham-taneja",
+    "name": "Pancham Taneja",
+    "designation": "Managing Director",
+    "organisation": "Delta Capita",
+    "photo": "/assets/img/talr/speakers/pancham-taneja.webp",
+    "bio": "",
+    "appearances": [
+      {
+        "year": 2026,
+        "session": "Hire. Fire. Rewire.",
+        "role": "Speaker"
+      }
+    ],
+    "logo": "/assets/img/logos/attendees/delta-capita.png"
   },
   {
     "id": "ramesh-narasimhan",
@@ -214,6 +459,22 @@ window.TALR_SPEAKERS = [
     "logo": null
   },
   {
+    "id": "nilesh-iyer",
+    "name": "Nilesh Iyer",
+    "designation": "Chief Executive Officer",
+    "organisation": "Natixis India",
+    "photo": "/assets/img/talr/speakers/nilesh-iyer.webp",
+    "bio": "Over 17 years of multinational experience in business operations and finance transformation. Leads Natixis in India and the evolution of its NGSI hub.",
+    "appearances": [
+      {
+        "year": 2022,
+        "session": "Fire @ the CEO",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/attendees/natixis.png"
+  },
+  {
     "id": "subodh-jindal",
     "name": "Subodh Jindal",
     "designation": "Global CEO",
@@ -230,6 +491,54 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/talr/speaker-logos/steer-engineering.png"
   },
   {
+    "id": "satish-kumar",
+    "name": "Satish Kumar",
+    "designation": "Co-Founder & CEO",
+    "organisation": "Glider AI",
+    "photo": "/assets/img/talr/speakers/satish-kumar.webp",
+    "bio": "Co-founded Glider AI, a talent quality platform built to make hiring fair through unbiased vetting of skills.",
+    "appearances": [
+      {
+        "year": 2023,
+        "session": "CEOs' Expectations from a Strategic TA Leader",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/partners/glider-ai.png"
+  },
+  {
+    "id": "ankit-aggarwal",
+    "name": "Ankit Aggarwal",
+    "designation": "Founder & CEO",
+    "organisation": "Unstop",
+    "photo": "/assets/img/talr/speakers/ankit-aggarwal.webp",
+    "bio": "Harvard Business School alumnus and ex-Deloitte. Built Unstop into a talent discovery and hiring platform with 8.5 million users across 20,000 campuses.",
+    "appearances": [
+      {
+        "year": 2024,
+        "session": "CEOs' Insights on Reimagining TA Strategies",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/partners/unstop.png"
+  },
+  {
+    "id": "sudarsan-ravi",
+    "name": "Sudarsan Ravi",
+    "designation": "Founder & CEO",
+    "organisation": "RippleHire",
+    "photo": "/assets/img/talr/speakers/sudarsan-ravi.webp",
+    "bio": "Founded RippleHire, the referral and ATS platform used by large enterprises across India.",
+    "appearances": [
+      {
+        "year": 2022,
+        "session": "Fire @ the CEO",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/partners/ripplehire.png"
+  },
+  {
     "id": "mohua-sengupta",
     "name": "Mohua Sengupta",
     "designation": "SVP & Country Head",
@@ -244,6 +553,54 @@ window.TALR_SPEAKERS = [
       }
     ],
     "logo": "/assets/img/talr/speaker-logos/the-standard.png"
+  },
+  {
+    "id": "aparna-rao",
+    "name": "Aparna Rao",
+    "designation": "Country Head & Board Member, CBS India",
+    "organisation": "Cargill",
+    "photo": "/assets/img/talr/speakers/aparna-rao.webp",
+    "bio": "Two decades in GBS and GCC leadership across procurement, order-to-cash, accounting, transitions and general management.",
+    "appearances": [
+      {
+        "year": 2024,
+        "session": "Fire @ the CEO",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/attendees/cargill.png"
+  },
+  {
+    "id": "sanjay-dora",
+    "name": "Sanjay Dora",
+    "designation": "India Country Operations Executive",
+    "organisation": "Telstra Innovation and Capability Centre",
+    "photo": "/assets/img/talr/speakers/sanjay-dora.webp",
+    "bio": "Over 25 years setting up and running large multi-geography shared services in India and the Philippines. Oversees Telstra's Innovation and Capability Centres in India.",
+    "appearances": [
+      {
+        "year": 2022,
+        "session": "Hitting Refresh in Talent Acquisition",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/attendees/telstra.png"
+  },
+  {
+    "id": "ranvijay-lamba",
+    "name": "Ranvijay Lamba",
+    "designation": "India Head",
+    "organisation": "Arcesium",
+    "photo": "/assets/img/talr/speakers/ranvijay-lamba.webp",
+    "bio": "Formerly Arcesium's Head of Technology for India, his expertise has driven its advanced technology, automation and security.",
+    "appearances": [
+      {
+        "year": 2017,
+        "session": "CEO Roundtable: TA in the Boardroom",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/talr/speaker-logos/arcesium.png"
   },
   {
     "id": "viren-bhatia",
@@ -278,38 +635,6 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/logos/attendees/tivo.png"
   },
   {
-    "id": "ranvijay-lamba",
-    "name": "Ranvijay Lamba",
-    "designation": "India Head",
-    "organisation": "Arcesium",
-    "photo": "/assets/img/talr/speakers/ranvijay-lamba.webp",
-    "bio": "Formerly Arcesium's Head of Technology for India, his expertise has driven its advanced technology, automation and security.",
-    "appearances": [
-      {
-        "year": 2017,
-        "session": "CEO Roundtable: TA in the Boardroom",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/arcesium.png"
-  },
-  {
-    "id": "pancham-taneja",
-    "name": "Pancham Taneja",
-    "designation": "Country Head of Business, India",
-    "organisation": "Delta Capita",
-    "photo": "/assets/img/talr/speakers/pancham-taneja.webp",
-    "bio": "",
-    "appearances": [
-      {
-        "year": 2026,
-        "session": "Hire. Fire. Rewire.",
-        "role": "Speaker"
-      }
-    ],
-    "logo": "/assets/img/logos/attendees/delta-capita.png"
-  },
-  {
     "id": "sandeep-dhar",
     "name": "Sandeep Dhar",
     "designation": "Country Head – India",
@@ -342,78 +667,36 @@ window.TALR_SPEAKERS = [
     "logo": null
   },
   {
-    "id": "nagaraj-ijari",
-    "name": "Nagaraj Ijari",
-    "designation": "Senior Vice President (Retd.), Global Head, HiTech & Professional Services BU",
-    "organisation": "Tata Consultancy Services",
-    "photo": "/assets/img/talr/speakers/nagaraj-ijari.webp",
-    "bio": "Close to 30 years with the Tata Group, including P&L ownership of a TCS business of 22,000 people, bringing a business view of hiring at scale for IT services.",
+    "id": "manish-jain",
+    "name": "Manish Jain",
+    "designation": "Head of India Operations",
+    "organisation": "Reltio",
+    "photo": "/assets/img/talr/speakers/manish-jain.webp",
+    "bio": "Led and built Reltio's India operations, with deep experience setting up and running software delivery centres.",
     "appearances": [
       {
-        "year": 2020,
-        "session": "TA in the Boardroom: CEOs' Perspectives",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/tcs.png"
-  },
-  {
-    "id": "anup-kapoor",
-    "name": "Anup Kapoor",
-    "designation": "Head of Global Operations",
-    "organisation": "Infosys BPM",
-    "photo": "/assets/img/talr/speakers/anup-kapoor.webp",
-    "bio": "A member of the Infosys BPM Board and Executive Council with close to 30 years of experience, bringing a boardroom view of hiring at scale, and a poet's turn of phrase.",
-    "appearances": [
-      {
-        "year": 2020,
+        "year": 2022,
         "session": "Fire @ the CEO",
         "role": "Panellist"
       }
     ],
-    "logo": "/assets/img/logos/attendees/infosys.png"
+    "logo": "/assets/img/logos/attendees/reltio.png"
   },
   {
-    "id": "mukul-ghosh",
-    "name": "Mukul Ghosh",
-    "designation": "Global Vice President, Customer Care (Technical Support)",
-    "organisation": "Aspect Software",
-    "photo": "/assets/img/talr/speakers/mukul-ghosh.webp",
-    "bio": "Began his career as an engineer in technical support and grew through roles across the services spectrum, holding several leadership positions along the way.",
+    "id": "purushothaman-balakrishnan",
+    "name": "Purushothaman Balakrishnan",
+    "designation": "VP Engineering & Head of India Operations",
+    "organisation": "Reltio",
+    "photo": "/assets/img/talr/speakers/purushothaman-balakrishnan.webp",
+    "bio": "About 30 years in product development at Symantec, Oracle, Informatica and Reltio, now building Reltio's India centre of excellence.",
     "appearances": [
       {
-        "year": 2021,
-        "session": "CEOs' Perspective on the Changing Face of TA",
+        "year": 2024,
+        "session": "CEOs' Insights on Reimagining TA Strategies",
         "role": "Panellist"
       }
     ],
-    "logo": "/assets/img/talr/speaker-logos/aspect-software.png"
-  },
-  {
-    "id": "aarti-mehta",
-    "name": "Aarti Mehta",
-    "designation": "Director",
-    "organisation": "DE Shaw India",
-    "photo": "/assets/img/talr/speakers/aarti-mehta.webp",
-    "bio": "",
-    "appearances": [],
-    "logo": null
-  },
-  {
-    "id": "vikram-nanwani",
-    "name": "Vikram Nanwani",
-    "designation": "Senior Director, India Technology Center",
-    "organisation": "Xylem Inc.",
-    "photo": "/assets/img/talr/speakers/vikram-nanwani.webp",
-    "bio": "17+ years of experience, leading a team of 200+ engineers across two campuses in mechanical, electrical, electronics and software domains.",
-    "appearances": [
-      {
-        "year": 2019,
-        "session": "Fire @ the CEO: TA Wants to Know",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/xylem.png"
+    "logo": "/assets/img/logos/attendees/reltio.png"
   },
   {
     "id": "arun-ponneth",
@@ -432,226 +715,19 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/talr/speaker-logos/molex.png"
   },
   {
-    "id": "mohit-sharma",
-    "name": "Mohit Sharma",
-    "designation": "Global TA Head",
-    "organisation": "KPMG Delivery Network",
-    "photo": "/assets/img/talr/speakers/mohit-sharma.webp",
-    "bio": "",
-    "appearances": [],
-    "logo": null
-  },
-  {
-    "id": "sreekanth-arimanithaya",
-    "name": "Sreekanth K Arimanithaya",
-    "designation": "Global Talent & Enablement Service Leader",
-    "organisation": "EY Global Delivery Services",
-    "photo": "/assets/img/talr/speakers/sreekanth-arimanithaya.webp",
-    "bio": "Over 27 years of multifaceted executive leadership in business transformation, driving a complete reimagining of the talent function at EY GDS as its Global Talent Leader.",
+    "id": "rajesh-balaraju",
+    "name": "Rajesh Balaraju",
+    "designation": "Director, Business Operations",
+    "organisation": "LSEG",
+    "photo": "/assets/img/talr/speakers/rajesh-balaraju.webp",
+    "bio": "Over 30 years in banking leadership. Set up GCCs for Bank of America and UBS, and is building LSEG's Technology Centre of Excellence in Hyderabad.",
     "appearances": [
       {
-        "year": 2021,
-        "session": "Fire @ the CEO: TA Wants to Know",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/logos/attendees/ey.png"
-  },
-  {
-    "id": "pooja-joshi",
-    "name": "Pooja Joshi",
-    "designation": "Director, Talent Acquisition, Diversity & Inclusion",
-    "organisation": "Qualcomm",
-    "photo": "/assets/img/talr/speakers/pooja-joshi.webp",
-    "bio": "16 years of diverse HR experience across three Fortune 500 corporations, in high tech, consumer health and pharmaceuticals, and financial services.",
-    "appearances": [
-      {
-        "year": 2019,
-        "session": "CEOs' Perspectives on the Future of TA",
-        "role": "Moderator"
-      }
-    ],
-    "logo": "/assets/img/logos/attendees/qualcomm.png"
-  },
-  {
-    "id": "rohit-agrawal",
-    "name": "Rohit Agrawal",
-    "designation": "Director, Talent Acquisition",
-    "organisation": "Walmart Labs",
-    "photo": "/assets/img/talr/speakers/rohit-agrawal.webp",
-    "bio": "A staffing leader specialising in the design and implementation of strategies to win the war for talent.",
-    "appearances": [
-      {
-        "year": 2017,
-        "session": "TA Roundtable",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/logos/attendees/walmart.png"
-  },
-  {
-    "id": "pradeep-desu",
-    "name": "Pradeep Desu",
-    "designation": "Head of Recruiting",
-    "organisation": "Uber",
-    "photo": "/assets/img/talr/speakers/pradeep-desu.webp",
-    "bio": "An experienced recruiting leader with expertise in hiring for product companies, seeding new teams and helping startups scale across business units and international regions.",
-    "appearances": [
-      {
-        "year": 2017,
-        "session": "TA Roundtable",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/logos/attendees/uber.png"
-  },
-  {
-    "id": "jatinder-salwan",
-    "name": "Jatinder Salwan",
-    "designation": "Head of Human Resources",
-    "organisation": "Societe Generale Global Solution Centre",
-    "photo": "/assets/img/talr/speakers/jatinder-salwan.webp",
-    "bio": "More than 30 years of experience, including service as a Lieutenant Colonel and programme manager in the Indian Army, before leading HR operations and talent acquisition at Societe Generale.",
-    "appearances": [
-      {
-        "year": 2017,
-        "session": "CEO Roundtable: TA in the Boardroom",
-        "role": "Panellist"
-      },
-      {
-        "year": 2020,
+        "year": 2024,
         "session": "Fire @ the CEO",
-        "role": "Moderator"
-      }
-    ],
-    "logo": "/assets/img/logos/attendees/societe-generale.png"
-  },
-  {
-    "id": "rashid-ul-kareem",
-    "name": "Rashid Ul Kareem",
-    "designation": "India Head, Talent Acquisition",
-    "organisation": "EY Global Delivery Services",
-    "photo": "/assets/img/talr/speakers/rashid-ul-kareem.webp",
-    "bio": "18 years across diverse roles and industries leading recruiting strategy with a global footprint, and a passion for candidate experience.",
-    "appearances": [
-      {
-        "year": 2017,
-        "session": "TA Roundtable",
         "role": "Panellist"
       }
     ],
-    "logo": "/assets/img/logos/attendees/ey.png"
-  },
-  {
-    "id": "deepak-taduru",
-    "name": "Deepak Taduru",
-    "designation": "Director, Talent Acquisition",
-    "organisation": "DBS Asia Hub",
-    "photo": "/assets/img/talr/speakers/deepak-taduru.webp",
-    "bio": "15 years of experience, recognised for a people first approach, decisive leadership and strong customer focus.",
-    "appearances": [
-      {
-        "year": 2017,
-        "session": "TA Roundtable",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/dbs.png"
-  },
-  {
-    "id": "daryl-pinto",
-    "name": "Daryl Pinto",
-    "designation": "Head, Talent Acquisition",
-    "organisation": "Northern Trust",
-    "photo": "/assets/img/talr/speakers/daryl-pinto.webp",
-    "bio": "16+ years in strategic hiring, designing recruiting roadmaps for captives, known for a logical, unconventional approach and decisive execution.",
-    "appearances": [
-      {
-        "year": 2017,
-        "session": "TA Roundtable",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/northern-trust.png"
-  },
-  {
-    "id": "anirvan-mukherjee",
-    "name": "Anirvan Mukherjee",
-    "designation": "Director, Human Resources",
-    "organisation": "CGI",
-    "photo": "/assets/img/talr/speakers/anirvan-mukherjee.webp",
-    "bio": "25+ years of diverse human resources experience across several Fortune 500 companies.",
-    "appearances": [
-      {
-        "year": 2020,
-        "session": "TA in the Boardroom: CEOs' Perspectives",
-        "role": "Moderator"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/cgi.png"
-  },
-  {
-    "id": "jayshankar-m",
-    "name": "Jayshankar M",
-    "designation": "Head of Talent Acquisition, India & APAC",
-    "organisation": "Blue Yonder",
-    "photo": "/assets/img/talr/speakers/jayshankar-m.webp",
-    "bio": "Over 17 years in talent acquisition, with deep experience hiring and building teams and in senior leadership hiring that needs a personal touch, across the spectrum.",
-    "appearances": [
-      {
-        "year": 2021,
-        "session": "CEOs' Perspective on the Changing Face of TA",
-        "role": "Moderator"
-      }
-    ],
-    "logo": "/assets/img/logos/attendees/blue-yonder.png"
-  },
-  {
-    "id": "sweety-rath",
-    "name": "Sweety Rath",
-    "designation": "HR Head, International (APAC, EMEA)",
-    "organisation": "Aspect Software",
-    "photo": "/assets/img/talr/speakers/sweety-rath.webp",
-    "bio": "16+ years in high tech product industries across multiple domains, partnering the business across the complete gamut of HR, including HR tools, systems and transformation.",
-    "appearances": [
-      {
-        "year": 2021,
-        "session": "Fire @ the CEO: TA Wants to Know",
-        "role": "Moderator"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/aspect-software.png"
-  },
-  {
-    "id": "kaushik-gopalan",
-    "name": "Kaushik Gopalan",
-    "designation": "Head HR, APAC",
-    "organisation": "Aspect Software",
-    "photo": "/assets/img/talr/speakers/kaushik-gopalan.webp",
-    "bio": "A senior HR professional with 15+ years in leading IT and ITES organisations in India and the US, across HR leadership, business partnering, compensation and strategic HR.",
-    "appearances": [
-      {
-        "year": 2019,
-        "session": "Fire @ the CEO: TA Wants to Know",
-        "role": "Moderator"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/aspect-software.png"
-  },
-  {
-    "id": "rohit-aradhya",
-    "name": "Rohit Aradhya",
-    "designation": "",
-    "organisation": "Barracuda Networks",
-    "photo": "/assets/img/talr/speakers/rohit-aradhya.webp",
-    "bio": "",
-    "appearances": [
-      {
-        "year": 2026,
-        "session": "Hire. Fire. Rewire.",
-        "role": "Speaker"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/barracuda-networks.png"
+    "logo": null
   }
 ];

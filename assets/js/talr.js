@@ -226,13 +226,13 @@
       return '<li><span class="n">0' + (i + 1) + '</span><div><b>' + esc(a.code.charAt(0) + a.code.slice(1).toLowerCase()) + '</b><p>' + esc(a.line) + '</p></div></li>';
     }).join('') + '</ol><a class="btn btn-primary" href="' + esc(agenda.dataset.cta || '#enquire') + '">Be first to see the agenda' + ARROW + '</a></aside>';
     var rows = A.sessions.map(function (s, i) {
-      var t = '<div class="at"><b>' + esc(s.time) + '</b>' + (s.kind !== 'break' && s.endTime ? '<span>to ' + esc(s.endTime) + '</span>' : '') + '</div>';
-      if (s.kind === 'break') return '<li class="agr k-break" data-reveal>' + t + '<div class="ab"><p class="bt">' + esc(s.title) + '</p></div></li>';
+      var t = '<div class="at"><b>' + esc(s.time) + '</b>' + (s.endTime ? '<span>to ' + esc(s.endTime) + '</span>' : '') + '</div>';
+      if (s.kind === 'break') return '<li class="agr k-break" data-reveal>' + t + '<div class="ab"><p class="bt">' + esc(s.title) + '</p>' + (s.desc ? '<p class="d">' + esc(s.desc) + '</p>' : '') + '</div></li>';
       var code = s.code ? '<span class="code">' + esc(s.code.charAt(0) + s.code.slice(1).toLowerCase()) + '</span>' : '';
       return '<li class="agr k-' + esc(s.kind) + '" data-reveal>' + t + '<div class="ab"><p class="al">' + code + esc(s.label || '') + '</p>' +
         '<h3>' + esc(s.title) + '</h3>' + (s.desc ? '<p class="d">' + esc(s.desc) + '</p>' : '') + (s.note ? '<p class="nt">' + esc(s.note) + '</p>' : '') + '</div></li>';
     }).join('');
-    agenda.innerHTML = aside + '<ol class="agl">' + rows + '</ol>';
+    agenda.innerHTML = aside + '<div class="agt"><h3 class="agt-h">The timeline</h3><ol class="agl">' + rows + '</ol></div>';
   }
 
   var PP = T.partnerPage || {};

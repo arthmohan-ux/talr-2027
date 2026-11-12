@@ -998,3 +998,23 @@ form .row.one { grid-template-columns: 1fr; }
 
 /* Emphasis inside pillar text */
 .pillar > p em { font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 1.12em; color: var(--champ); }
+
+/* Agenda v2 (12 Nov): timeline heading, break rows carry a line */
+.agt-h { margin: 0 0 26px; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.7rem; line-height: 1.15; color: var(--plum); }
+.agr.k-break .ab > p.d { margin: 4px 0 0; font-size: .93rem; color: var(--slate); max-width: 60ch; }
+.agr.k-break .bt { color: var(--plum); font-weight: 600; }
+.agr .ab > p.d { max-width: 64ch; }
+
+/* Nav fit (12 Nov): the TAD mark, the way home and the TALR mark all share one row, so the bar gets a wider frame,
+   the way home is an arrow, and the marks step down a size before the menu folds at 1360px */
+.tnav .nav-inner { max-width: 1440px; gap: 16px; }
+.tnav .nav-left { gap: 14px; }
+.tnav .home-link { padding: 9px; }
+.tnav .home-link span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tnav .nav-links a:not(.btn):not(.seg a) { padding: 0 8px; }
+.tnav .nav-seg, .tnav .nav-cta { margin-left: 8px; }
+.tnav .nav-tad { padding-right: 14px; }
+@media (max-width: 1500px) and (min-width: 1361px) {
+  .tnav .nav-tad img { height: 24px; }
+  .tnav .brand img { height: 30px; }
+}

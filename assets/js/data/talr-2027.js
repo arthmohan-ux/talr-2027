@@ -574,15 +574,15 @@ window.TALR = {
     "arc": [
       {
         "code": "SIGNAL",
-        "line": "Read the shifts in the talent landscape."
+        "line": "Read the forces reshaping hiring, straight from the people making the calls."
       },
       {
         "code": "SYNC",
-        "line": "Get candid about what's coming next."
+        "line": "Put your questions to the C-suite, and calibrate against 300 peers facing the same decisions."
       },
       {
         "code": "STEER",
-        "line": "Shape the playbook together for the course ahead."
+        "line": "Build your industry's playbook with your peers, and leave with the course set for the year ahead."
       }
     ],
     "sessions": [
@@ -592,7 +592,7 @@ window.TALR = {
         "kind": "session",
         "label": "Keynote",
         "title": "Opening keynote",
-        "desc": "Speaker to be announced."
+        "desc": "Hear from a top voice in the industry as they set the tone for the day. The name lands closer to the date."
       },
       {
         "time": "10:00 AM",
@@ -601,13 +601,13 @@ window.TALR = {
         "label": "Panel 1",
         "code": "SIGNAL",
         "title": "C-Suite Leaders’ Perspectives: The New Talent Standard",
-        "desc": "Shifts in the talent landscape, and what they point to."
+        "desc": "Hear from the people who sign off on headcount and make the calls at the top, on the shifts they are seeing in the talent landscape and what those shifts mean for the way you hire."
       },
       {
         "time": "11:15 AM",
-        "endTime": "11:45 AM",
         "kind": "break",
-        "title": "Networking break"
+        "title": "Networking break",
+        "desc": "Step out, find your peers, and let the corridor conversations start."
       },
       {
         "time": "11:45 AM",
@@ -616,27 +616,22 @@ window.TALR = {
         "label": "Panel 2",
         "code": "SYNC",
         "title": "Fire at the C-Suite: Where Are We Headed",
-        "desc": "A candid Q&A with TA leaders on how they should approach what’s coming next."
+        "desc": "The hour where the questions go the other way. TA leaders ask, the C-suite answers, live and unscripted. Come with the questions you actually want answered, and leave with the view from the top on every one of them."
       },
       {
         "time": "1:00 PM",
         "endTime": "2:00 PM",
         "kind": "break",
-        "title": "Lunch"
+        "title": "Lunch",
+        "desc": "A spread worth taking your time over, and the ambience of the venue around you. Good food, better company!"
       },
       {
         "time": "2:00 PM",
-        "endTime": "2:45 PM",
+        "endTime": "3:00 PM",
         "kind": "experience",
         "label": "Experience",
         "title": "The Retreat Experience",
-        "desc": "Step away from the room, and connect differently."
-      },
-      {
-        "time": "2:45 PM",
-        "endTime": "3:00 PM",
-        "kind": "break",
-        "title": "Break"
+        "desc": "Consider this the day’s surprise. Come ready to leave the room and the title behind, and just enjoy it with your peers. Our delegates are still talking about the last two editions. Stay tuned!"
       },
       {
         "time": "3:00 PM",
@@ -644,23 +639,23 @@ window.TALR = {
         "kind": "panel",
         "label": "Roundtables",
         "code": "STEER",
-        "title": "TA Leaders’ Industry Roundtables",
-        "desc": "Co-creating the industry playbooks for the course ahead.",
-        "note": "Running alongside: fireside chats and podcast recordings."
+        "title": "Setting the Course: Industry Roundtables",
+        "desc": "One table, and the TA leaders hiring against the same market you are. One hour to work through what is actually coming at your industry, and to co-create the playbook for the course ahead.",
+        "note": "Running alongside: fireside chats and podcast recordings, if you would rather be on the mic."
       },
       {
         "time": "4:00 PM",
         "endTime": "5:00 PM",
         "kind": "session",
         "label": "To be announced",
-        "title": "One more conversation",
-        "desc": "Revealed closer to the day."
+        "title": "The Closing Hour",
+        "desc": "The final hour of the retreat is still under wraps. All we will say is that it is built to be worth staying for."
       },
       {
         "time": "5:00 PM",
-        "endTime": "onwards",
         "kind": "break",
-        "title": "High tea and networking"
+        "title": "High tea and networking",
+        "desc": "The slow end to the day. Unwind, take in the venue, and let the conversations run as long as they want."
       }
     ]
   },
