@@ -924,3 +924,23 @@ form .row.one { grid-template-columns: 1fr; }
   .rm .ico { width: 40px; height: 40px; }
   .rm b { margin-top: 16px; }
 }
+
+/* ===== TALR 2027 theme block (landing heroes and form pages) ===== */
+.theme { margin-top: 26px; }
+.th-k { margin: 0; font-size: .95rem; font-weight: 500; color: var(--slate); }
+.th-t { margin: 6px 0 0; font-family: var(--serif); font-weight: 600; font-size: clamp(1.7rem, 2.8vw, 2.35rem); line-height: 1.08; letter-spacing: -0.01em; color: var(--plum); font-variant-numeric: lining-nums; }
+.th-t em { font-style: italic; color: var(--terra); }
+.th-pill { display: inline-flex; align-items: center; gap: 12px; margin: 16px 0 0; padding: 8px 18px 8px 8px; border: 1px solid rgba(75, 15, 46, .16); background: linear-gradient(90deg, rgba(244, 199, 184, .55), rgba(249, 231, 218, .35)); font-size: .92rem; font-weight: 600; color: var(--wine); }
+.th-pill .orb { display: grid; place-items: center; width: 34px; height: 34px; flex: none; background: var(--plum); color: var(--champ); }
+.th-pill .orb svg { width: 22px; height: 22px; }
+.thero .lockup-presents { width: min(480px, 100%); margin-top: 0; }
+.thero h1 + .when + .theme { margin-top: 24px; }
+.rhero2 .theme { margin: 0 0 26px; padding-bottom: 24px; border-bottom: 1px solid rgba(75, 15, 46, .14); }
+@media (max-width: 560px) { .th-pill { font-size: .84rem; gap: 10px; } .th-pill .orb { width: 30px; height: 30px; } }
+
+/* TA Dialogues mark beside the TALR logo in the landing nav */
+.tnav .nav-tad { display: flex; align-items: center; flex: none; padding-right: 18px; border-right: 1px solid var(--line); }
+.tnav .nav-tad img { height: 30px; width: auto; max-width: none; }
+@media (max-width: 1240px) and (min-width: 901px) { .tnav .nav-tad img { height: 24px; } .tnav .nav-tad { padding-right: 12px; } }
+@media (max-width: 620px) { .tnav .nav-tad img { height: 20px; } .tnav .nav-tad { padding-right: 10px; } }
+@media (max-width: 400px) { .tnav .nav-tad { display: none; } }
