@@ -144,20 +144,22 @@
   });
 
   function editionRow(e, i) {
-    var d = new Date(e.date + 'T00:00:00');
-    var day = d.getDate();
-    var mon = d.toLocaleString('en-GB', { month: 'short' });
+    /* "YYYY-MM-DD" shows the day big; "YYYY" (date not confirmed) shows the year big */
+    var full = e.date.length > 4;
+    var d = new Date((full ? e.date : e.date + '-01-01') + 'T00:00:00');
+    var big = full ? d.getDate() : d.getFullYear();
+    var small = full ? d.toLocaleString('en-GB', { month: 'short' }) + ' ' + d.getFullYear() : (e.edition || '');
     var title = e.title || (e.format + (e.city ? ' ' + e.city : ''));
     var tag = e.url ? 'a' : 'article';
     var href = e.url ? ' href="' + esc(e.url) + '"' : '';
-    var img = e.image ? '<img src="' + esc(e.image) + '" alt="' + esc(title) + '" loading="lazy">' : '';
+    var img = e.image ? '<img src="' + esc(e.image) + '" alt="' + esc(e.format + ' ' + d.getFullYear() + ', ' + title) + '" loading="lazy" decoding="async">' : '';
     return '<' + tag + ' class="ed"' + href + ' data-reveal style="--d:' + ((i % 3) * 90) + 'ms">' +
-      '<div class="ed-date"><time datetime="' + esc(e.date) + '"><span class="d">' + day + '</span><span class="m">' + mon + ' ' + d.getFullYear() + '</span></time></div>' +
+      '<div class="ed-date"><time datetime="' + esc(e.date) + '"><span class="d' + (full ? '' : ' d-yr') + '">' + big + '</span><span class="m">' + esc(small) + '</span></time></div>' +
       '<div class="ed-photo"><div class="ed-img ph ph-' + ((i % 6) + 1) + '">' + img + '</div></div>' +
       '<div class="ed-body"><div class="ed-meta">' +
         '<span class="fmt fmt-' + (FORMAT_CLASS[e.format] || 'round') + '">' + esc(e.format) + '</span>' +
         (e.city ? '<span class="ed-city">' + esc(e.city) + '</span>' : '') +
-        (e.sample ? '<span class="fmt fmt-sample">Sample</span>' : '') +
+        (e.edition && full ? '<span class="ed-city">' + esc(e.edition) + '</span>' : '') +
       '</div><h3>' + esc(title) + '</h3>' + (e.blurb ? '<p>' + esc(e.blurb) + '</p>' : '') + '</div>' +
       (e.url ? '<span class="ed-arrow" aria-hidden="true">' + ARROW + '</span>' : '<span></span>') +
       '</' + tag + '>';
@@ -172,7 +174,13 @@
   var all = $('[data-editions-all]');
   if (all) {
     var current = 'All';
-    var chips = $$('[data-filter]');
+    /* A format with no editions yet loses its chip; with one format left, the filter row goes */
+    var chips = $$('[data-filter]').filter(function (c) {
+      var keep = c.dataset.filter === 'All' || editions.some(function (e) { return e.format === c.dataset.filter; });
+      if (!keep) c.remove();
+      return keep;
+    });
+    if (chips.length <= 2 && chips[0] && chips[0].parentNode) chips[0].parentNode.hidden = true;
     var render = function () {
       var list = editions.filter(function (e) { return current === 'All' || e.format === current; });
       if (!list.length) { all.innerHTML = '<p class="empty">No editions in this format yet.</p>'; return; }
@@ -193,6 +201,34 @@
       });
     });
     render();
+  }
+
+  /* Testimonials (data/voices.js): written quotes and short videos in three columns, filled in order,
+     so the mix stays as set in the data. Same grid on /events and the TALR delegate page.
+     Videos load only when played, and only one plays at a time. */
+  var vg = $('[data-voices]');
+  if (vg && window.TAD_VOICES && window.TAD_VOICES.length) {
+    var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+    var vcards = window.TAD_VOICES.map(function (v, i) {
+      var d = ' data-reveal style="--d:' + ((i % 3) * 80) + 'ms"';
+      if (v.type === 'video') {
+        return '<figure class="vc vc-video"' + d + '><div class="vc-frame"><video preload="none" playsinline poster="' + esc(v.poster) + '" aria-label="' + esc(v.label || 'Testimonial video') + '">' +
+          '<source src="' + esc(v.src) + '" type="video/mp4"></video><button class="vc-play" type="button" aria-label="Play video">' + PLAY + '</button></div>' +
+          (v.label ? '<figcaption>' + esc(v.label) + '</figcaption>' : '') + '</figure>';
+      }
+      return '<figure class="vc vc-quote"' + d + '><svg class="vc-mark" viewBox="0 0 34 24" aria-hidden="true"><path d="M0 24V14.5C0 6.6 4.3 1.6 12.4 0l1.3 4.1C9 5.4 6.9 8.2 6.7 12H13v12zm19.6 0V14.5c0-7.9 4.3-12.9 12.4-14.5l1.3 4.1c-4.7 1.3-6.8 4.1-7 7.9h6.3v12z"/></svg><blockquote>' + esc(v.quote) + '</blockquote>' +
+        '<figcaption><b>' + esc(v.title) + '</b>' + (v.label ? '<span>' + esc(v.label) + '</span>' : '') + '</figcaption></figure>';
+    });
+    var vper = Math.ceil(vcards.length / 3);
+    vg.innerHTML = [0, 1, 2].map(function (c) { return '<div class="vcol">' + vcards.slice(c * vper, c * vper + vper).join('') + '</div>'; }).join('');
+    $$('.vc-video', vg).forEach(function (f) {
+      var video = $('video', f), btn = $('.vc-play', f);
+      btn.addEventListener('click', function () {
+        $$('video', vg).forEach(function (o) { if (o !== video) o.pause(); });
+        video.controls = true; f.classList.add('on'); video.play();
+      });
+      video.addEventListener('ended', function () { f.classList.remove('on'); video.controls = false; video.load(); });
+    });
   }
 
   /* Arm reveals once the page's content is in place, then switch hiding on */

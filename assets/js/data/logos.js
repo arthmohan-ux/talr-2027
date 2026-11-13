@@ -1,9 +1,11 @@
 /*
-  Logo walls. Attendees fill three rows, partners two.
+  Logo walls, one source for every page (home, /events, both TALR pages).
+  Attendees fill three rows, partners two.
   To add a logo: drop a transparent PNG (about 360x110 max) into assets/img/logos/<group>/ and add a line here.
-  Attendees are in order of first sight: the best-known names come first. They are dealt round-robin
-  into the three rows (1st, 4th, 7th... in row one), so the first 9 are what a phone shows straight away
-  and the first ~24 are what a laptop shows. Keep the big names at the top when adding logos.
+  Both lists are dealt round-robin into their rows (1st, 4th, 7th... in row one for attendees; 1st, 3rd, 5th...
+  for partners), so the order here is the order people see. Keep the big names at the top when adding logos.
+  Attendees: the first 9 are what a phone shows straight away and the first ~24 are what a laptop shows.
+  Partners: the TALR order Arth set on 12 Nov (Unstop, DoSelect, Peepal ... then Sage, Zwayam, Reckrut).
 */
 window.TAD_LOGOS = {
   "attendees": [
@@ -664,13 +666,19 @@ window.TAD_LOGOS = {
       "h": 110
     },
     {
+      "name": "Sage",
+      "src": "/assets/img/talr/partners/sage.png",
+      "w": 640,
+      "h": 360
+    },
+    {
       "name": "DoSelect",
       "src": "/assets/img/logos/partners/doselect.png",
       "w": 331,
       "h": 110
     },
     {
-      "name": "Peepal",
+      "name": "Peepal Consulting",
       "src": "/assets/img/logos/partners/peepal.png",
       "w": 333,
       "h": 110
@@ -692,6 +700,12 @@ window.TAD_LOGOS = {
       "src": "/assets/img/logos/partners/parkar.png",
       "w": 360,
       "h": 115
+    },
+    {
+      "name": "Prismforce",
+      "src": "/assets/img/talr/partners/prismforce.png",
+      "w": 490,
+      "h": 90
     },
     {
       "name": "Glider.ai",
@@ -760,7 +774,7 @@ window.TAD_LOGOS = {
       "h": 89
     },
     {
-      "name": "Superhire",
+      "name": "SuperHire",
       "src": "/assets/img/logos/partners/superhire.png",
       "w": 360,
       "h": 73
@@ -772,7 +786,7 @@ window.TAD_LOGOS = {
       "h": 110
     },
     {
-      "name": "Thomas",
+      "name": "Thomas Assessments",
       "src": "/assets/img/logos/partners/thomas.png",
       "w": 291,
       "h": 110
@@ -794,6 +808,18 @@ window.TAD_LOGOS = {
       "src": "/assets/img/logos/partners/maneshala.png",
       "w": 115,
       "h": 110
+    },
+    {
+      "name": "Zwayam",
+      "src": "/assets/img/talr/partners/zwayam.png",
+      "w": 115,
+      "h": 141
+    },
+    {
+      "name": "Reckrut",
+      "src": "/assets/img/talr/partners/reckrut.png",
+      "w": 327,
+      "h": 124
     }
   ]
 };

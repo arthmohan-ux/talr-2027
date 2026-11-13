@@ -91,30 +91,6 @@
     }).join('');
   }
 
-  /* Testimonials: masonry of written quotes and short videos. Videos load only when played. */
-  var vg = $('[data-voices]');
-  if (vg && T.voices) {
-    var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-    var cards = T.voices.map(function (v, i) {
-      var d = ' data-reveal style="--d:' + ((i % 3) * 80) + 'ms"';
-      if (v.type === 'video') {
-        return '<figure class="vc vc-video"' + d + '><div class="vc-frame"><video preload="none" playsinline poster="' + esc(v.poster) + '" aria-label="' + esc(v.label || 'Testimonial video') + '">' +
-          '<source src="' + esc(v.src) + '" type="video/mp4"></video><button class="vc-play" type="button" aria-label="Play video">' + PLAY + '</button></div></figure>';
-      }
-      return '<figure class="vc vc-quote"' + d + '><blockquote>“' + esc(v.quote) + '”</blockquote><figcaption><b>' + esc(v.title) + '</b>' + (v.label ? '<span>' + esc(v.label) + '</span>' : '') + '</figcaption></figure>';
-    });
-    /* Three fixed columns, filled in order (two cards each), so the mix of quotes and videos stays as set in the data */
-    var per = Math.ceil(cards.length / 3);
-    vg.innerHTML = [0, 1, 2].map(function (c) { return '<div class="vcol">' + cards.slice(c * per, c * per + per).join('') + '</div>'; }).join('');
-    $$('.vc-video', vg).forEach(function (f) {
-      var video = $('video', f), btn = $('.vc-play', f);
-      btn.addEventListener('click', function () {
-        $$('video', vg).forEach(function (o) { if (o !== video) o.pause(); });
-        video.controls = true; f.classList.add('on'); video.play();
-      });
-      video.addEventListener('ended', function () { f.classList.remove('on'); video.controls = false; video.load(); });
-    });
-  }
 
   /* Moments feed the site testimonial carousel. Paraphrased lines are shown without quote marks. */
   if ($('[data-quotes]') && T.moments) {
@@ -134,19 +110,6 @@
     });
   }
 
-  /* Partner wall: two rows of logos, no captions. Logos are dealt round-robin (1st, 3rd, 5th... in row one),
-     so the order in talr-2027.js is the order people see them.
-     Each row repeats so a single set is wider than the screen, which the marquee needs. */
-  var pRows = $$('[data-talr-partners]');
-  if (pRows.length && T.partners) {
-    pRows.forEach(function (row, r) {
-      var tiles = T.partners.filter(function (p, i) { return i % pRows.length === r; }).map(function (p) {
-        return '<div class="pt"><div class="logo"><img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async"></div></div>';
-      });
-      var set = tiles.join('');
-      row.innerHTML = set + set.replace(/<div class="pt">/g, '<div class="pt" aria-hidden="true">') + set.replace(/<div class="pt">/g, '<div class="pt" aria-hidden="true">');
-    });
-  }
 
   /* Dialog (speaker profiles) */
   var lastFocus = null;
