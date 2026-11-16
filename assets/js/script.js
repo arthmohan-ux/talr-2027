@@ -231,6 +231,131 @@
     });
   }
 
+  /* Tabs ([data-tabs]): role tabs on the homepage. Arrow keys move between tabs; the orange ink slides under the active one */
+  $$('[data-tabs]').forEach(function (box) {
+    var tabs = $$('[role="tab"]', box), ink = $('.role-ink', box);
+    var place = function (t) {
+      if (!ink) return;
+      ink.style.setProperty('--x', t.offsetLeft + 'px');
+      ink.style.setProperty('--w', t.offsetWidth + 'px');
+    };
+    var pick = function (t, focus) {
+      tabs.forEach(function (o) {
+        var on = o === t;
+        o.setAttribute('aria-selected', String(on));
+        o.tabIndex = on ? 0 : -1;
+        document.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+      });
+      place(t);
+      if (focus) t.focus();
+    };
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { pick(t); });
+      t.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); }
+      });
+    });
+    var current = function () { return tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0]; };
+    place(current());
+    window.addEventListener('resize', function () { place(current()); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { place(current()); });
+  });
+
+  /* Arriving with a #section link (e.g. /#enquire from the popup): the browser jumps before the
+     JS-built sections and images are in place, so jump again once the page has settled */
+  if (location.hash.length > 1) {
+    var hashGo = function () {
+      var t = null;
+      try { t = document.querySelector(decodeURIComponent(location.hash)); } catch (e) {}
+      if (t) t.scrollIntoView({ behavior: 'auto' });
+    };
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    requestAnimationFrame(hashGo);
+    window.addEventListener('load', function () { setTimeout(hashGo, 60); });
+  }
+
+  /* TALR 2027 popup. Pages opt in with <body data-talr-popup="<link to the attend form>">.
+     On: /, /events, /events/past-editions, /events/talr-2027. Off: the partner page, the standalone form pages, privacy.
+     Shows once, 15 seconds into a visit, then stays away for 3 days (or for good once someone clicks through).
+     Skipped if the form is on screen or being filled, and after the event date. */
+  (function () {
+    var target = document.body.getAttribute('data-talr-popup');
+    if (!target) return;
+    var KEY = 'tadTalrPopup', WAIT = 15000, QUIET = 3 * 864e5, EVENT_END = Date.UTC(2027, 1, 26, 18, 30);
+    if (Date.now() > EVENT_END) return;
+    var get = function () { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } };
+    var set = function (v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} };
+    var seen = get();
+    if (seen && (seen.went || Date.now() - seen.at < QUIET)) return;
+    var samePage = target.charAt(0) === '#';
+    var formBusy = function () {
+      if (!samePage) return false;
+      var f = document.querySelector(target);
+      if (!f) return false;
+      if (f.contains(document.activeElement)) return true;
+      var r = f.getBoundingClientRect();
+      return r.top < innerHeight * .8 && r.bottom > innerHeight * .2;
+    };
+    var X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    var open = function () {
+      if (formBusy() || document.querySelector('.dlg, .tpop')) { setTimeout(open, 8000); return; }
+      if (!document.querySelector('link[href*="Cormorant"]')) {
+        var fl = document.createElement('link');
+        fl.rel = 'stylesheet';
+        fl.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap';
+        document.head.appendChild(fl);
+      }
+      set({ at: Date.now() });
+      var last = document.activeElement;
+      var d = document.createElement('div');
+      d.className = 'tpop';
+      d.setAttribute('role', 'dialog');
+      d.setAttribute('aria-modal', 'true');
+      d.setAttribute('aria-labelledby', 'tpop-t');
+      d.innerHTML = '<div class="tpop-box">' +
+        '<button class="tpop-x" type="button" aria-label="Close">' + X + '</button>' +
+        '<div class="tpop-art" aria-hidden="true">' +
+          '<svg class="tpop-wedge" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="tpop-wg" x1="1" y1="0" x2=".35" y2=".65"><stop offset="0" stop-color="#F9E7DA" stop-opacity=".14"/><stop offset="1" stop-color="#F9E7DA" stop-opacity="0"/></linearGradient></defs><polygon points="0,0 100,0 100,100" fill="url(#tpop-wg)"/><line x1="0" y1="16" x2="84" y2="100" stroke="#E46A13" stroke-opacity=".45" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>' +
+          '<span class="seal10"><img class="s-base" src="/assets/img/talr/brand/seal-base.webp" alt="" width="720" height="720"><img class="s-ring" src="/assets/img/talr/brand/seal-ring.webp" alt="" width="720" height="720"></span>' +
+        '</div>' +
+        '<div class="tpop-body">' +
+          '<div class="tpop-lockup" role="img" aria-label="TA Dialogues presents TA Leadership Retreat 2027, 10th Edition"><img class="lk-tad" src="/assets/img/talr/brand/talr-presents-tad.webp" alt="" width="447" height="97"><span class="lk-p">Presents</span><img class="lk-talr" src="/assets/img/talr/brand/talr-presents-lockup.webp" alt="" width="1311" height="322"></div>' +
+          '<h2 id="tpop-t">The Talent Orbit: <em>Signal. Sync. Steer.</em></h2>' +
+          '<p>26 February 2027. 300+ TA leaders and the C-suite they hire for, in one room. Seats are offered by invitation.</p>' +
+          '<div class="tpop-actions"><a class="btn tpop-go" href="' + esc(target) + '">Register your interest ' + ARROW + '</a><button class="tpop-no" type="button">Not now</button></div>' +
+        '</div></div>';
+      document.body.appendChild(d);
+      var close = function () {
+        d.classList.add('out');
+        setTimeout(function () { d.remove(); }, 300);
+        document.removeEventListener('keydown', onKey);
+        if (last && last.focus) last.focus();
+      };
+      var onKey = function (e) {
+        if (e.key === 'Escape') close();
+        if (e.key === 'Tab') {
+          var f = $$('a[href], button', d), first = f[0], end = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); end.focus(); }
+          else if (!e.shiftKey && document.activeElement === end) { e.preventDefault(); first.focus(); }
+        }
+      };
+      document.addEventListener('keydown', onKey);
+      $('.tpop-x', d).addEventListener('click', close);
+      $('.tpop-no', d).addEventListener('click', close);
+      d.addEventListener('click', function (e) { if (e.target === d) close(); });
+      $('.tpop-go', d).addEventListener('click', function (e) {
+        set({ at: Date.now(), went: true });
+        if (samePage) {
+          var f = document.querySelector(target);
+          if (f) { e.preventDefault(); close(); f.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); history.replaceState(null, '', target); }
+        }
+      });
+      $('.tpop-go', d).focus();
+    };
+    setTimeout(open, WAIT);
+  })();
+
   /* Arm reveals once the page's content is in place, then switch hiding on */
   armReveals(document);
   if (revealIO) document.documentElement.classList.add('reveal-on');

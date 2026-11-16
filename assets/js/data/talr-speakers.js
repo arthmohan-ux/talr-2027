@@ -107,6 +107,22 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/logos/attendees/thomson-reuters.png"
   },
   {
+    "id": "mohua-sengupta",
+    "name": "Mohua Sengupta",
+    "designation": "SVP & Country Head",
+    "organisation": "The Standard",
+    "photo": "/assets/img/talr/speakers/mohua-sengupta.webp",
+    "bio": "",
+    "appearances": [
+      {
+        "year": 2026,
+        "session": "Hire. Fire. Rewire.",
+        "role": "Speaker"
+      }
+    ],
+    "logo": "/assets/img/talr/speaker-logos/the-standard.png"
+  },
+  {
     "id": "james-brandt",
     "name": "James Brandt",
     "designation": "Managing Director",
@@ -123,20 +139,68 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/talr/speaker-logos/lowes-india.png"
   },
   {
-    "id": "jayashree-easwaran",
-    "name": "Jayashree Easwaran",
-    "designation": "Managing Director",
-    "organisation": "Diageo Business Services India",
-    "photo": "/assets/img/talr/speakers/jayashree-easwaran.webp",
-    "bio": "A Chartered Accountant who moved from Finance Director at HP to Diageo, becoming Managing Director of Diageo Business Services India in 2021.",
+    "id": "mukta-arora",
+    "name": "Mukta Arora",
+    "designation": "Former Managing Director",
+    "organisation": "Elanco",
+    "photo": "/assets/img/talr/speakers/mukta-arora.webp",
+    "bio": "Over 30 years in life sciences across India and Europe. Founding Partner, Board Director and MD at Elanco, previously with Eli Lilly's GCC.",
     "appearances": [
       {
-        "year": 2023,
-        "session": "CEOs' Expectations from a Strategic TA Leader",
+        "year": 2025,
+        "session": "The Hiring Disconnect: Unfiltered Insights from the C-Suite",
         "role": "Panellist"
       }
     ],
-    "logo": "/assets/img/logos/attendees/diageo.png"
+    "logo": "/assets/img/logos/attendees/elanco.png"
+  },
+  {
+    "id": "james-favors",
+    "name": "James Favors",
+    "designation": "Managing Director",
+    "organisation": "JCPenney",
+    "photo": "/assets/img/talr/speakers/james-favors.webp",
+    "bio": "25+ years in retail, responsible for expanding key business functions including IT, digital, store operations, analytics, marketing, infrastructure and merchandise operations.",
+    "appearances": [
+      {
+        "year": 2017,
+        "session": "CEO Roundtable: TA in the Boardroom",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/talr/speaker-logos/jcpenney.png"
+  },
+  {
+    "id": "john-kenny",
+    "name": "John Kenny",
+    "designation": "Managing Director",
+    "organisation": "KAS Services India (Kmart)",
+    "photo": "/assets/img/talr/speakers/john-kenny.webp",
+    "bio": "Leads the capability centre for technology, analytics, inventory, data platform and digital capability strategy, with 26 years across FTSE 100 and Fortune 500 companies and Australian retailers.",
+    "appearances": [
+      {
+        "year": 2019,
+        "session": "Fire @ the CEO: TA Wants to Know",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/talr/speaker-logos/kas-services-india.png"
+  },
+  {
+    "id": "shalini-sankarshana",
+    "name": "Shalini Sankarshana",
+    "designation": "Managing Director & Country Manager",
+    "organisation": "Planview India",
+    "photo": "/assets/img/talr/speakers/shalini-sankarshana.webp",
+    "bio": "Nearly 25 years building enterprise platforms. A voice in the GCC and startup ecosystem who has contributed to NASSCOM's product skilling and diversity work.",
+    "appearances": [
+      {
+        "year": 2025,
+        "session": "The Hiring Disconnect: Unfiltered Insights from the C-Suite",
+        "role": "Panellist"
+      }
+    ],
+    "logo": null
   },
   {
     "id": "venkataraman-sv",
@@ -203,6 +267,22 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/talr/speaker-logos/xylem.png"
   },
   {
+    "id": "jayashree-easwaran",
+    "name": "Jayashree Easwaran",
+    "designation": "Managing Director",
+    "organisation": "Diageo Business Services India",
+    "photo": "/assets/img/talr/speakers/jayashree-easwaran.webp",
+    "bio": "A Chartered Accountant who moved from Finance Director at HP to Diageo, becoming Managing Director of Diageo Business Services India in 2021.",
+    "appearances": [
+      {
+        "year": 2023,
+        "session": "CEOs' Expectations from a Strategic TA Leader",
+        "role": "Panellist"
+      }
+    ],
+    "logo": "/assets/img/logos/attendees/diageo.png"
+  },
+  {
     "id": "manoj-nagpal",
     "name": "Manoj Nagpal",
     "designation": "Managing Director & VP, Professional Services",
@@ -235,74 +315,10 @@ window.TALR_SPEAKERS = [
     "logo": "/assets/img/logos/attendees/lumen.png"
   },
   {
-    "id": "rency-mathews",
-    "name": "Rency Mathew",
-    "designation": "Managing Director India & APAC ANZ People Leader",
-    "organisation": "Sabre Corporation",
-    "photo": "/assets/img/talr/speakers/rency-mathews.webp",
-    "bio": "",
-    "appearances": [
-      {
-        "year": 2026,
-        "session": "Hire. Fire. Rewire.",
-        "role": "Speaker"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/sabre.png"
-  },
-  {
-    "id": "mukta-arora",
-    "name": "Mukta Arora",
-    "designation": "Former Managing Director",
-    "organisation": "Elanco",
-    "photo": "/assets/img/talr/speakers/mukta-arora.webp",
-    "bio": "Over 30 years in life sciences across India and Europe. Founding Partner, Board Director and MD at Elanco, previously with Eli Lilly's GCC.",
-    "appearances": [
-      {
-        "year": 2025,
-        "session": "The Hiring Disconnect: Unfiltered Insights from the C-Suite",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/logos/attendees/elanco.png"
-  },
-  {
-    "id": "james-favors",
-    "name": "James Favors",
-    "designation": "Managing Director",
-    "organisation": "JCPenney",
-    "photo": "/assets/img/talr/speakers/james-favors.webp",
-    "bio": "25+ years in retail, responsible for expanding key business functions including IT, digital, store operations, analytics, marketing, infrastructure and merchandise operations.",
-    "appearances": [
-      {
-        "year": 2017,
-        "session": "CEO Roundtable: TA in the Boardroom",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/jcpenney.png"
-  },
-  {
-    "id": "john-kenny",
-    "name": "John Kenny",
-    "designation": "Managing Director",
-    "organisation": "KAS Services India (Kmart)",
-    "photo": "/assets/img/talr/speakers/john-kenny.webp",
-    "bio": "Leads the capability centre for technology, analytics, inventory, data platform and digital capability strategy, with 26 years across FTSE 100 and Fortune 500 companies and Australian retailers.",
-    "appearances": [
-      {
-        "year": 2019,
-        "session": "Fire @ the CEO: TA Wants to Know",
-        "role": "Panellist"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/kas-services-india.png"
-  },
-  {
     "id": "anand-kadur",
     "name": "Anand Kadur",
-    "designation": "Managing Director",
-    "organisation": "IG Group",
+    "designation": "Country Head",
+    "organisation": "Sage",
     "photo": "/assets/img/talr/speakers/anand-kadur.webp",
     "bio": "Over 24 years across professional services, support, R&D and business development, having worked in the US, South America, Africa and APAC.",
     "appearances": [
@@ -312,7 +328,7 @@ window.TALR_SPEAKERS = [
         "role": "Panellist"
       }
     ],
-    "logo": null
+    "logo": "/assets/img/talr/partners/sage.png"
   },
   {
     "id": "girish-kamath",
@@ -345,22 +361,6 @@ window.TALR_SPEAKERS = [
       }
     ],
     "logo": "/assets/img/talr/speaker-logos/barracuda-networks.png"
-  },
-  {
-    "id": "shalini-sankarshana",
-    "name": "Shalini Sankarshana",
-    "designation": "Managing Director & Country Manager",
-    "organisation": "Planview India",
-    "photo": "/assets/img/talr/speakers/shalini-sankarshana.webp",
-    "bio": "Nearly 25 years building enterprise platforms. A voice in the GCC and startup ecosystem who has contributed to NASSCOM's product skilling and diversity work.",
-    "appearances": [
-      {
-        "year": 2025,
-        "session": "The Hiring Disconnect: Unfiltered Insights from the C-Suite",
-        "role": "Panellist"
-      }
-    ],
-    "logo": null
   },
   {
     "id": "sandeep-sharma",
@@ -409,6 +409,22 @@ window.TALR_SPEAKERS = [
       }
     ],
     "logo": null
+  },
+  {
+    "id": "rency-mathews",
+    "name": "Rency Mathew",
+    "designation": "Managing Director India & APAC ANZ People Leader",
+    "organisation": "Sabre Corporation",
+    "photo": "/assets/img/talr/speakers/rency-mathews.webp",
+    "bio": "",
+    "appearances": [
+      {
+        "year": 2026,
+        "session": "Hire. Fire. Rewire.",
+        "role": "Speaker"
+      }
+    ],
+    "logo": "/assets/img/talr/speaker-logos/sabre.png"
   },
   {
     "id": "pancham-taneja",
@@ -537,22 +553,6 @@ window.TALR_SPEAKERS = [
       }
     ],
     "logo": "/assets/img/logos/partners/ripplehire.png"
-  },
-  {
-    "id": "mohua-sengupta",
-    "name": "Mohua Sengupta",
-    "designation": "SVP & Country Head",
-    "organisation": "The Standard",
-    "photo": "/assets/img/talr/speakers/mohua-sengupta.webp",
-    "bio": "",
-    "appearances": [
-      {
-        "year": 2026,
-        "session": "Hire. Fire. Rewire.",
-        "role": "Speaker"
-      }
-    ],
-    "logo": "/assets/img/talr/speaker-logos/the-standard.png"
   },
   {
     "id": "aparna-rao",

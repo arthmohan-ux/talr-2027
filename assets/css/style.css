@@ -908,3 +908,38 @@ a.ed:hover .ed-arrow { background: var(--sunrise); }
   .reveal-on .t-learn.in .venn .k, .reveal-on .t-learn.in .venn .d { transform: none; transition-delay: .4s; }
   .reveal-on .t-learn.in .venn .lens { opacity: 1; transition-delay: 1s; }
 }
+
+/* TALR 2027 popup (script.js). Fixed TALR colours so it looks the same on main and TALR pages */
+.tpop { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px 16px; background: rgba(42, 8, 25, .72); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); animation: tpopFade .4s var(--ease-out) both; }
+.tpop.out { animation: tpopFade .3s var(--ease) reverse both; }
+@keyframes tpopFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes tpopRise { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: none; } }
+.tpop-box { position: relative; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); width: 100%; max-width: 900px; max-height: 100%; overflow: auto; background: #FFFBF8; border-top: 3px solid #E46A13; box-shadow: 0 30px 80px rgba(42, 8, 25, .5); animation: tpopRise .55s var(--ease-out) .05s both; }
+.tpop-x { position: absolute; top: 12px; right: 12px; z-index: 2; width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(75, 15, 46, .14); background: #FFFBF8; color: #4B0F2E; cursor: pointer; transition: background-color .25s var(--ease), color .25s var(--ease); }
+.tpop-x svg { width: 20px; height: 20px; }
+.tpop-x:hover { background: #4B0F2E; color: #F9E7DA; }
+.tpop-art { position: relative; overflow: hidden; display: grid; place-items: center; min-height: 100%; padding: 40px; background: radial-gradient(circle at 30% 25%, #7A2E47, #4B0F2E 70%); }
+.tpop-wedge { position: absolute; right: 0; top: 0; width: 75%; height: 100%; }
+.tpop-art .seal10 { width: min(78%, 260px); filter: drop-shadow(0 18px 28px rgba(0, 0, 0, .35)); }
+.tpop-body { padding: clamp(32px, 4vw, 52px) clamp(26px, 3.6vw, 48px) clamp(28px, 3.4vw, 44px); }
+.tpop-lockup { display: flex; flex-direction: column; align-items: center; container-type: inline-size; width: min(100%, 380px); margin-right: 40px; }
+.tpop-lockup .lk-tad { width: 34.1cqw; height: auto; }
+.tpop-lockup .lk-p { margin: 1.5cqw 0 .6cqw; font-family: var(--display); font-weight: 700; font-style: normal; font-size: 3.7cqw; line-height: 1; color: #4B0F2E; }
+.tpop-lockup .lk-talr { width: 100%; height: auto; }
+.tpop-body h2 { margin: clamp(22px, 2.6vw, 30px) 0 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: clamp(1.7rem, 2.6vw, 2.2rem); line-height: 1.08; letter-spacing: -0.005em; color: #4B0F2E; font-variant-numeric: lining-nums; }
+.tpop-body h2 em { font-style: italic; color: #B24A3A; }
+.tpop-body p { margin: 12px 0 0; color: #4A2836; max-width: 40ch; }
+.tpop-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin-top: clamp(22px, 2.6vw, 30px); }
+.tpop-go { background: #E46A13; color: #2A0819; }
+.tpop-go:hover { background: #4B0F2E; color: #F9E7DA; }
+.tpop-no { padding: 8px 0; border: 0; background: none; font: inherit; font-weight: 600; color: #7A5866; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(122, 88, 102, .4); }
+.tpop-no:hover { color: #4B0F2E; }
+@media (max-width: 700px) {
+  .tpop-box { grid-template-columns: 1fr; }
+  .tpop-art { min-height: 0; padding: 22px; }
+  .tpop-art .seal10 { width: 110px; }
+  .tpop-lockup { margin-right: 0; }
+  .tpop-actions .btn { flex: 1 1 100%; justify-content: center; }
+  .tpop-no { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .tpop, .tpop-box { animation: none; } }

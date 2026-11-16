@@ -282,14 +282,14 @@
     pq.innerHTML = qs + qs.replace(/<figure class="qc">/g, '<figure class="qc" aria-hidden="true">');
   }
 
-  /* Editions rail, same card on both TALR pages: photo, year, edition, title. 2027 also shows its date. */
+  /* Editions rail, same card on both TALR pages: photo, edition (big, left), year (small, right), title. 2027 also shows its date. */
   $$('[data-erail]').forEach(function (rail) {
     if (!T.journey) return;
     var nx = T.journey.next;
     var ecard = function (o) {
       return '<article class="ecard' + (o.cls ? ' ' + o.cls : '') + '">' +
         '<div class="ec-img">' + (o.img ? '<img src="' + esc(o.img) + '" alt="' + esc(o.alt) + '" loading="lazy" decoding="async">' : '') + (o.inner || '') + '</div>' +
-        '<div class="ec-b"><p class="ec-y"><b>' + esc(o.year) + '</b><span>' + esc(o.ed) + '</span></p><h3>' + esc(o.title) + '</h3>' +
+        '<div class="ec-b"><p class="ec-y"><b>' + esc(o.ed) + '</b><span>' + esc(o.year) + '</span></p><h3>' + esc(o.title) + '</h3>' +
         (o.date ? '<p class="ec-f">' + esc(o.date) + '</p>' : '') + '</div></article>';
     };
     var cards = [ecard({ cls: 'next', year: '2027', ed: nx.edition, title: nx.title, date: nx.date,
