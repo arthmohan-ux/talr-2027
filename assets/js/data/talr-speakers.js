@@ -141,7 +141,7 @@ window.TALR_SPEAKERS = [
   {
     "id": "mukta-arora",
     "name": "Mukta Arora",
-    "designation": "Former Managing Director",
+    "designation": "Managing Director",
     "organisation": "Elanco",
     "photo": "/assets/img/talr/speakers/mukta-arora.webp",
     "bio": "Over 30 years in life sciences across India and Europe. Founding Partner, Board Director and MD at Elanco, previously with Eli Lilly's GCC.",
