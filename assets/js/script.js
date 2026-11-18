@@ -579,3 +579,45 @@
     }).observe(nav, { attributes: true, attributeFilter: ['class'] });
   }
 })();
+
+/* Side tabs: the orange tab on the right edge of the screen. It slides in once the header has scrolled away
+   and slides out while a form is on screen (the form is right there; the tab would only repeat it).
+   Main pages: join-form.js makes the "Join the community" tab and hands it to TAD_SIDETAB.
+   TALR pages: <body data-talr-tab="Label|#form-section|icon"> makes a tab that takes you to the page's form. */
+(function () {
+  var ICONS = {
+    seat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="1"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M12 12.5v5M9.5 15h5"/></svg>',
+    partner: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M9 7V4.5h6V7M3 12.5h18"/></svg>'
+  };
+  function arm(tab) {
+    var head = document.querySelector('.hh, .cm-head, .thero, .pgh, .page-head');
+    var forms = Array.prototype.slice.call(document.querySelectorAll('#join, .enq, [data-join-form], [data-talr-form]'));
+    var past = !head, near = [];
+    function set() {
+      var on = past && !near.some(Boolean);
+      tab.classList.toggle('is-on', on);
+      tab.tabIndex = on ? 0 : -1;
+      tab.setAttribute('aria-hidden', String(!on));
+    }
+    if (!('IntersectionObserver' in window)) { past = true; set(); return; }
+    /* The header counts as gone once its bottom edge passes under the nav */
+    if (head) new IntersectionObserver(function (en) { past = !en[0].isIntersecting; set(); }, { rootMargin: '-90px 0px 0px 0px' }).observe(head);
+    forms.forEach(function (f, i) {
+      near[i] = false;
+      new IntersectionObserver(function (en) { near[i] = en[0].isIntersecting; set(); }, { rootMargin: '0px 0px -12% 0px' }).observe(f);
+    });
+    set();
+  }
+  window.TAD_SIDETAB = arm;
+
+  var cfg = document.body.getAttribute('data-talr-tab');
+  if (cfg) {
+    var p = cfg.split('|');
+    var tab = document.createElement('a');
+    tab.className = 'jtab';
+    tab.href = p[1];
+    tab.innerHTML = (ICONS[p[2]] || ICONS.seat) + '<span>' + p[0] + '</span>';
+    document.body.appendChild(tab);
+    arm(tab);
+  }
+})();

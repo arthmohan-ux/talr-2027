@@ -943,3 +943,59 @@ a.ed:hover .ed-arrow { background: var(--sunrise); }
   .tpop-no { flex: 1 1 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .tpop, .tpop-box { animation: none; } }
+
+/* Site footer (17 Nov): light, logo and socials on top, columns that mirror the nav, a quiet bottom line.
+   Replaces .footer.mfoot on the main pages; TALR pages keep their own footer. */
+.sfoot { margin-top: clamp(64px, 8vw, 120px); background: #FFFFFF; border-top: 1px solid var(--midnight); color: var(--ink); padding-block: clamp(44px, 5vw, 72px) calc(24px + env(safe-area-inset-bottom, 0px)); }
+.sf-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 40px; padding-bottom: clamp(28px, 3.4vw, 44px); border-bottom: 1px solid var(--line); }
+.sf-logo img { width: clamp(220px, 22vw, 320px); height: auto; }
+.sf-social { display: flex; align-items: stretch; gap: 8px; }
+.sf-li, .sf-ico { background: var(--blue); color: #FFFFFF; transition: background-color .25s var(--ease), transform .35s var(--ease-out); }
+.sf-li { gap: 12px; }
+.sf-li svg { width: 18px; height: 18px; }
+.sf-li:hover, .sf-ico:hover { background: var(--midnight); color: #FFFFFF; }
+.sf-li:hover svg { transform: none; }
+.sf-ico { display: grid; place-items: center; width: 52px; }
+.sf-ico svg { width: 21px; height: 21px; }
+.sf-ico:hover { transform: translateY(-2px); }
+.sf-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.3fr); gap: 28px clamp(20px, 3vw, 48px); padding-block: clamp(32px, 4vw, 52px); }
+.sf-col h3 { margin-bottom: 14px; font-family: var(--sans); font-size: 1rem; font-weight: 600; letter-spacing: 0; color: var(--midnight); }
+.sf-col h3 a { text-decoration: none; }
+.sf-col h3 a:hover { color: var(--accent); }
+.sf-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.sf-col a { color: var(--ink-soft); text-decoration: none; transition: color .2s var(--ease); }
+.sf-col a:hover { color: var(--accent); }
+.sf-col address { display: grid; gap: 10px; font-style: normal; color: var(--ink-soft); line-height: 1.5; }
+.sf-col address span { color: var(--slate); max-width: 30ch; }
+.sf-bottom { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-top: 22px; border-top: 1px solid var(--line); font-size: .9rem; color: var(--slate); }
+.sf-bottom p { margin: 0; }
+.sf-legal { margin-left: auto !important; }
+.sf-legal a { color: var(--slate); text-decoration: none; }
+.sf-legal a:hover { color: var(--accent); }
+.sf-up { display: grid; place-items: center; width: 44px; height: 44px; background: var(--blue); color: #FFFFFF; transition: background-color .25s var(--ease); }
+.sf-up svg { width: 20px; height: 20px; }
+.sf-up:hover { background: var(--midnight); }
+@media (max-width: 1000px) { .sf-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .sf-cols { grid-template-columns: 1fr 1fr; }
+  .sf-cols > :last-child { grid-column: 1 / -1; }
+  .sf-li { flex: 1; justify-content: center; }
+  .sf-social { width: 100%; }
+  .sf-legal { margin-left: 0 !important; }
+}
+
+/* Side tab (main pages: Join the community; TALR: Register your interest, Partner with us).
+   Off screen until the header has scrolled away; slides out again while a form is on screen (script.js) */
+.jtab {
+  position: fixed; right: 0; top: 50%; z-index: 80; transform: translate(110%, -50%); visibility: hidden;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 18px 13px; border: 0; background: var(--sunrise); color: var(--ink); cursor: pointer; text-decoration: none;
+  box-shadow: -10px 14px 30px -14px rgba(245, 138, 31, .7);
+  transition: transform .5s var(--ease-out), visibility 0s linear .5s, padding .35s var(--ease-out), background-color .25s var(--ease);
+}
+.jtab.is-on { transform: translate(0, -50%); visibility: visible; transition: transform .5s var(--ease-out), visibility 0s, padding .35s var(--ease-out), background-color .25s var(--ease); }
+.jtab span { writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 600; font-size: .95rem; letter-spacing: .01em; white-space: nowrap; }
+.jtab svg { width: 20px; height: 20px; }
+.jtab:hover { padding-right: 18px; background: var(--sunrise-hover); }
+@media (max-width: 640px) { .jtab { padding: 12px 7px; gap: 8px; } .jtab span { font-size: .76rem; } .jtab svg { width: 16px; height: 16px; } }
+@media (prefers-reduced-motion: reduce) { .jtab, .jtab.is-on { transition: none; } }
