@@ -316,7 +316,7 @@ body.ms { background: #FFFFFF; }
   .bl { grid-template-columns: 1fr; gap: 32px; }
 }
 
-/* 10 Testimonials: quotes, and videos that autoplay muted. Hover for sound and controls */
+/* 10 Testimonials: quotes and videos (player rules in style.css) */
 .vgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.4vw, 20px); align-items: start; }
 .vcol { display: grid; gap: clamp(14px, 1.4vw, 20px); }
 .vcol:nth-child(2) { margin-top: clamp(0px, 4vw, 64px); }

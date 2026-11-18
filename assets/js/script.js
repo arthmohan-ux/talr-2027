@@ -205,7 +205,7 @@
 
   /* Testimonials (data/voices.js): written quotes and short videos in three columns, filled in order,
      so the mix stays as set in the data. One player everywhere ([data-voices]: home, Community, TALR delegate page).
-     Videos play muted while on screen. Hover (or tap) for sound at 60% and the controls; only one has sound at a time.
+     Videos play muted while on screen. Click (or tap) for sound at 60%; hover shows the controls. Only one has sound at a time.
      Full screen shows the whole frame (letterboxed, never cropped) with the same controls. */
   var vg = $('[data-voices]');
   if (vg && window.TAD_VOICES && window.TAD_VOICES.length) {
@@ -227,7 +227,7 @@
           '<div class="vp" aria-label="Video controls"><div class="vp-bar"><input type="range" min="0" max="1000" value="0" step="1" aria-label="Seek"><i></i></div>' +
           '<div class="vp-row"><button type="button" class="vp-play" aria-label="Pause">' + PAUSE + '</button><span class="vp-time">0:00 / 0:00</span>' +
           '<span class="vp-sp"></span><button type="button" class="vp-mute" aria-label="Unmute">' + MUTE + '</button><button type="button" class="vp-full" aria-label="Full screen">' + FULL + '</button></div></div>' +
-          '<span class="vp-hint" aria-hidden="true">' + VOL + '<em>Hover for sound</em></span></div>' +
+          '<span class="vp-hint" aria-hidden="true">' + VOL + '<em>Click for sound</em></span></div>' +
           (v.label ? '<figcaption>' + esc(v.label) + '</figcaption>' : '') + '</figure>';
       }
       return '<figure class="vc vc-quote"' + d + '>' + MARK + '<blockquote>' + esc(v.quote) + '</blockquote>' +
@@ -236,7 +236,6 @@
     var vper = Math.ceil(vcards.length / 3);
     vg.innerHTML = [0, 1, 2].map(function (c) { return '<div class="vcol">' + vcards.slice(c * vper, c * vper + vper).join('') + '</div>'; }).join('');
     var vall = $$('.vlive', vg);
-    var canSound = function () { return !navigator.userActivation || navigator.userActivation.hasBeenActive; };
     var setSound = function (v, onOff) {
       if (onOff) {
         vall.forEach(function (o) { var ov = $('video', o); if (ov !== v) ov.muted = true; });
@@ -252,6 +251,7 @@
         bPlay.innerHTML = v.paused ? PLAY : PAUSE; bPlay.setAttribute('aria-label', v.paused ? 'Play' : 'Pause');
         bMute.innerHTML = v.muted ? MUTE : VOL; bMute.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute');
         bFull.innerHTML = isFull() ? SHRINK : FULL; bFull.setAttribute('aria-label', isFull() ? 'Exit full screen' : 'Full screen');
+        f.classList.toggle('sound', !v.muted);
       };
       v.addEventListener('timeupdate', function () {
         var k = v.duration ? v.currentTime / v.duration : 0;
@@ -274,20 +274,19 @@
         else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
         setSound(v, true);
       });
-      var onFs = function () { sync(); if (!isFull() && !f.matches(':hover')) { f.classList.remove('live'); setSound(v, false); } };
+      var onFs = function () { sync(); if (!isFull() && !f.matches(':hover')) f.classList.remove('live'); };
       document.addEventListener('fullscreenchange', onFs);
       document.addEventListener('webkitfullscreenchange', onFs);
-      var on = function () { f.classList.add('live'); if (canSound()) setSound(v, true); else { f.classList.add('needs-tap'); hint.textContent = 'Click for sound'; } };
-      var off = function () { if (isFull()) return; f.classList.remove('live', 'needs-tap'); setSound(v, false); };
+      /* Sound is always a click (a tap on phones), never a hover. Hover only brings up the controls.
+         Click again for silence. Sound stays on until then, another video gets it, or the video scrolls away */
       if (window.matchMedia('(hover: hover)').matches) {
-        f.addEventListener('mouseenter', on);
-        f.addEventListener('mouseleave', off);
+        f.addEventListener('mouseenter', function () { f.classList.add('live'); });
+        f.addEventListener('mouseleave', function () { if (!isFull()) f.classList.remove('live'); });
       } else hint.textContent = 'Tap for sound';
-      /* Touch, or the first click before the browser allows sound: a tap shows the controls and turns sound on */
       frame.addEventListener('click', function (e) {
         if (e.target.closest('.vp')) return;
         if (isFull()) { if (v.paused) v.play(); else v.pause(); return; }
-        f.classList.add('live'); f.classList.remove('needs-tap'); setSound(v, true);
+        f.classList.add('live'); setSound(v, v.muted);
       });
       frame.addEventListener('dblclick', function (e) { if (!e.target.closest('.vp')) bFull.click(); });
       sync();
@@ -298,7 +297,7 @@
         es.forEach(function (en) {
           var v = $('video', en.target);
           if (fsEl() && en.target.contains(fsEl())) return;
-          if (en.isIntersecting && !reduce) v.play().catch(function () {}); else v.pause();
+          if (en.isIntersecting && !reduce) v.play().catch(function () {}); else { v.pause(); v.muted = true; }
         });
       }, { threshold: 0.35 });
       vall.forEach(function (f) { vio.observe(f); });
