@@ -204,31 +204,105 @@
   }
 
   /* Testimonials (data/voices.js): written quotes and short videos in three columns, filled in order,
-     so the mix stays as set in the data. Same grid on /events and the TALR delegate page.
-     Videos load only when played, and only one plays at a time. */
+     so the mix stays as set in the data. One player everywhere ([data-voices]: home, Community, TALR delegate page).
+     Videos play muted while on screen. Hover (or tap) for sound at 60% and the controls; only one has sound at a time.
+     Full screen shows the whole frame (letterboxed, never cropped) with the same controls. */
   var vg = $('[data-voices]');
   if (vg && window.TAD_VOICES && window.TAD_VOICES.length) {
-    var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+    var I = function (d) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + d + '</svg>'; };
+    var PLAY = I('<path fill="currentColor" d="M8 5v14l11-7z"/>');
+    var PAUSE = I('<path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/>');
+    var VOL = I('<path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>');
+    var MUTE = I('<path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4z"/><path d="m16 9 5 6m0-6-5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>');
+    var FULL = I('<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>');
+    var SHRINK = I('<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>');
+    var MARK = '<svg class="vc-mark" viewBox="0 0 34 24" aria-hidden="true"><path d="M0 24V14.5C0 6.6 4.3 1.6 12.4 0l1.3 4.1C9 5.4 6.9 8.2 6.7 12H13v12zm19.6 0V14.5c0-7.9 4.3-12.9 12.4-14.5l1.3 4.1c-4.7 1.3-6.8 4.1-7 7.9h6.3v12z"/></svg>';
+    var clock = function (s) { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); };
+    var fsEl = function () { return document.fullscreenElement || document.webkitFullscreenElement || null; };
     var vcards = window.TAD_VOICES.map(function (v, i) {
       var d = ' data-reveal style="--d:' + ((i % 3) * 80) + 'ms"';
       if (v.type === 'video') {
-        return '<figure class="vc vc-video"' + d + '><div class="vc-frame"><video preload="none" playsinline poster="' + esc(v.poster) + '" aria-label="' + esc(v.label || 'Testimonial video') + '">' +
-          '<source src="' + esc(v.src) + '" type="video/mp4"></video><button class="vc-play" type="button" aria-label="Play video">' + PLAY + '</button></div>' +
+        return '<figure class="vc vc-video vlive"' + d + '><div class="vc-frame">' +
+          '<video muted loop playsinline preload="metadata" poster="' + esc(v.poster) + '" aria-label="' + esc(v.label || 'Testimonial video') + '"><source src="' + esc(v.src) + '" type="video/mp4"></video>' +
+          '<div class="vp" aria-label="Video controls"><div class="vp-bar"><input type="range" min="0" max="1000" value="0" step="1" aria-label="Seek"><i></i></div>' +
+          '<div class="vp-row"><button type="button" class="vp-play" aria-label="Pause">' + PAUSE + '</button><span class="vp-time">0:00 / 0:00</span>' +
+          '<span class="vp-sp"></span><button type="button" class="vp-mute" aria-label="Unmute">' + MUTE + '</button><button type="button" class="vp-full" aria-label="Full screen">' + FULL + '</button></div></div>' +
+          '<span class="vp-hint" aria-hidden="true">' + VOL + '<em>Hover for sound</em></span></div>' +
           (v.label ? '<figcaption>' + esc(v.label) + '</figcaption>' : '') + '</figure>';
       }
-      return '<figure class="vc vc-quote"' + d + '><svg class="vc-mark" viewBox="0 0 34 24" aria-hidden="true"><path d="M0 24V14.5C0 6.6 4.3 1.6 12.4 0l1.3 4.1C9 5.4 6.9 8.2 6.7 12H13v12zm19.6 0V14.5c0-7.9 4.3-12.9 12.4-14.5l1.3 4.1c-4.7 1.3-6.8 4.1-7 7.9h6.3v12z"/></svg><blockquote>' + esc(v.quote) + '</blockquote>' +
+      return '<figure class="vc vc-quote"' + d + '>' + MARK + '<blockquote>' + esc(v.quote) + '</blockquote>' +
         '<figcaption><b>' + esc(v.title) + '</b>' + (v.label ? '<span>' + esc(v.label) + '</span>' : '') + '</figcaption></figure>';
     });
     var vper = Math.ceil(vcards.length / 3);
     vg.innerHTML = [0, 1, 2].map(function (c) { return '<div class="vcol">' + vcards.slice(c * vper, c * vper + vper).join('') + '</div>'; }).join('');
-    $$('.vc-video', vg).forEach(function (f) {
-      var video = $('video', f), btn = $('.vc-play', f);
-      btn.addEventListener('click', function () {
-        $$('video', vg).forEach(function (o) { if (o !== video) o.pause(); });
-        video.controls = true; f.classList.add('on'); video.play();
+    var vall = $$('.vlive', vg);
+    var canSound = function () { return !navigator.userActivation || navigator.userActivation.hasBeenActive; };
+    var setSound = function (v, onOff) {
+      if (onOff) {
+        vall.forEach(function (o) { var ov = $('video', o); if (ov !== v) ov.muted = true; });
+        v.volume = 0.6; v.muted = false;
+        if (v.paused) v.play().catch(function () {});
+      } else v.muted = true;
+    };
+    vall.forEach(function (f) {
+      var v = $('video', f), frame = $('.vc-frame', f), bar = $('.vp-bar input', f), fill = $('.vp-bar i', f), time = $('.vp-time', f);
+      var bPlay = $('.vp-play', f), bMute = $('.vp-mute', f), bFull = $('.vp-full', f), hint = $('.vp-hint em', f), seeking = false;
+      var isFull = function () { return fsEl() === frame; };
+      var sync = function () {
+        bPlay.innerHTML = v.paused ? PLAY : PAUSE; bPlay.setAttribute('aria-label', v.paused ? 'Play' : 'Pause');
+        bMute.innerHTML = v.muted ? MUTE : VOL; bMute.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute');
+        bFull.innerHTML = isFull() ? SHRINK : FULL; bFull.setAttribute('aria-label', isFull() ? 'Exit full screen' : 'Full screen');
+      };
+      v.addEventListener('timeupdate', function () {
+        var k = v.duration ? v.currentTime / v.duration : 0;
+        if (!seeking) bar.value = Math.round(k * 1000);
+        fill.style.transform = 'scaleX(' + k + ')';
+        time.textContent = clock(v.currentTime) + ' / ' + clock(v.duration);
       });
-      video.addEventListener('ended', function () { f.classList.remove('on'); video.controls = false; video.load(); });
+      ['play', 'pause', 'volumechange'].forEach(function (e) { v.addEventListener(e, sync); });
+      bar.addEventListener('input', function () { seeking = true; if (v.duration) v.currentTime = bar.value / 1000 * v.duration; });
+      bar.addEventListener('change', function () { seeking = false; });
+      bPlay.addEventListener('click', function () { if (v.paused) v.play(); else v.pause(); });
+      bMute.addEventListener('click', function () { setSound(v, v.muted); });
+      /* Full screen: the frame goes full screen (so our controls come with it) and the video switches to contain.
+         iPhone Safari only allows the video itself, which opens its own player. Full screen means you want to watch: sound on */
+      bFull.addEventListener('click', function () {
+        if (isFull()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+        f.classList.add('live');
+        if (frame.requestFullscreen) frame.requestFullscreen().catch(function () {});
+        else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+        else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+        setSound(v, true);
+      });
+      var onFs = function () { sync(); if (!isFull() && !f.matches(':hover')) { f.classList.remove('live'); setSound(v, false); } };
+      document.addEventListener('fullscreenchange', onFs);
+      document.addEventListener('webkitfullscreenchange', onFs);
+      var on = function () { f.classList.add('live'); if (canSound()) setSound(v, true); else { f.classList.add('needs-tap'); hint.textContent = 'Click for sound'; } };
+      var off = function () { if (isFull()) return; f.classList.remove('live', 'needs-tap'); setSound(v, false); };
+      if (window.matchMedia('(hover: hover)').matches) {
+        f.addEventListener('mouseenter', on);
+        f.addEventListener('mouseleave', off);
+      } else hint.textContent = 'Tap for sound';
+      /* Touch, or the first click before the browser allows sound: a tap shows the controls and turns sound on */
+      frame.addEventListener('click', function (e) {
+        if (e.target.closest('.vp')) return;
+        if (isFull()) { if (v.paused) v.play(); else v.pause(); return; }
+        f.classList.add('live'); f.classList.remove('needs-tap'); setSound(v, true);
+      });
+      frame.addEventListener('dblclick', function (e) { if (!e.target.closest('.vp')) bFull.click(); });
+      sync();
     });
+    /* Play only while on screen */
+    if ('IntersectionObserver' in window) {
+      var vio = new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          var v = $('video', en.target);
+          if (fsEl() && en.target.contains(fsEl())) return;
+          if (en.isIntersecting && !reduce) v.play().catch(function () {}); else v.pause();
+        });
+      }, { threshold: 0.35 });
+      vall.forEach(function (f) { vio.observe(f); });
+    }
   }
 
   /* Tabs ([data-tabs]): role tabs on the homepage. Arrow keys move between tabs; the orange ink slides under the active one */

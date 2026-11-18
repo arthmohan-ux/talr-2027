@@ -829,25 +829,43 @@ a.ed:hover .ed-arrow { background: var(--sunrise); }
 .vc-quote figcaption { margin-top: clamp(24px, 2.4vw, 34px); padding-top: 18px; border-top: 1px solid var(--line); display: grid; gap: 4px; }
 .vc-quote figcaption b { font-weight: 600; font-size: 1rem; color: var(--midnight); }
 .vc-quote figcaption span { font-size: .92rem; color: var(--slate); }
-.vc-frame { position: relative; aspect-ratio: 16 / 9; background: var(--midnight); overflow: hidden; }
-.vc-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .9s var(--ease-out); }
-.vc-video:not(.on):hover video { transform: scale(1.04); }
-.vc-frame::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, .28)); transition: opacity .4s var(--ease); }
-.vc-video.on .vc-frame::after { opacity: 0; }
-.vc-play {
-  position: absolute; inset: 0; z-index: 1; margin: auto;
-  width: 68px; height: 68px; border: 0; border-radius: 50%;
-  display: grid; place-items: center; cursor: pointer;
-  background: var(--sunrise); color: #fff;
-  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, .5);
-  transition: transform .45s var(--ease-out), background-color .3s var(--ease);
-}
-.vc-play::before { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, .6); animation: vcPing 2.6s var(--ease-out) infinite; }
-@keyframes vcPing { 0% { transform: scale(.85); opacity: .9; } 80%, 100% { transform: scale(1.35); opacity: 0; } }
-.vc-play svg { width: 26px; height: 26px; margin-left: 4px; fill: currentColor; }
-.vc-play:hover, .vc-video:hover .vc-play { transform: scale(1.08); }
-.vc-video.on .vc-play { display: none; }
 .vc-video figcaption { margin-top: 12px; font-size: .95rem; line-height: 1.45; color: var(--slate); }
+/* The video player (script.js): plays muted on screen; hover or tap for sound and the controls */
+.vc-frame { position: relative; aspect-ratio: 16 / 9; background: var(--midnight); overflow: hidden; cursor: pointer; }
+.vc-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.vp { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 30px 14px 10px; background: linear-gradient(180deg, transparent, rgba(5, 12, 35, .78)); color: #FFFFFF; opacity: 0; transform: translateY(8px); transition: opacity .3s var(--ease), transform .4s var(--ease-out); pointer-events: none; }
+.vlive.live .vp, .vlive:focus-within .vp { opacity: 1; transform: none; pointer-events: auto; }
+.vp-bar { position: relative; height: 16px; display: flex; align-items: center; }
+.vp-bar::before { content: ""; position: absolute; left: 0; right: 0; height: 3px; background: rgba(255, 255, 255, .3); }
+.vp-bar i { position: absolute; left: 0; right: 0; height: 3px; background: var(--sunrise); transform: scaleX(0); transform-origin: left; pointer-events: none; }
+.vp-bar input { position: relative; z-index: 1; width: 100%; margin: 0; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; }
+.vp-bar input::-webkit-slider-runnable-track { height: 16px; background: transparent; }
+.vp-bar input::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: 1px; border-radius: 50%; background: #FFFFFF; border: 0; }
+.vp-bar input::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #FFFFFF; border: 0; }
+.vp-bar input::-moz-range-track { background: transparent; }
+.vp-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.vp-row button { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; background: transparent; color: #FFFFFF; cursor: pointer; }
+.vp-row button svg { width: 22px; height: 22px; }
+.vp-row button:hover { color: var(--sunrise); }
+.vp-time { font-size: .82rem; font-variant-numeric: tabular-nums; }
+.vp-sp { flex: 1; }
+.vp-hint { position: absolute; left: 10px; top: 10px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; background: rgba(5, 12, 35, .55); color: #FFFFFF; font-size: .76rem; font-weight: 600; transition: opacity .3s var(--ease); }
+.vp-hint svg { width: 15px; height: 15px; }
+.vp-hint em { font-style: normal; }
+.vlive.live:not(.needs-tap) .vp-hint { opacity: 0; }
+.vlive.needs-tap .vp-hint { opacity: 1; }
+/* Full screen: the whole frame shows, letterboxed on black; never cropped. Controls stay up, a little larger */
+.vc-frame:fullscreen { aspect-ratio: auto; width: 100%; height: 100%; background: #000; cursor: default; }
+.vc-frame:-webkit-full-screen { aspect-ratio: auto; width: 100%; height: 100%; background: #000; cursor: default; }
+.vc-frame:fullscreen video { object-fit: contain; }
+.vc-frame:-webkit-full-screen video { object-fit: contain; }
+.vc-frame:fullscreen .vp { opacity: 1; transform: none; pointer-events: auto; padding: 60px clamp(20px, 3vw, 40px) clamp(14px, 2vw, 24px); }
+.vc-frame:-webkit-full-screen .vp { opacity: 1; transform: none; pointer-events: auto; padding: 60px clamp(20px, 3vw, 40px) clamp(14px, 2vw, 24px); }
+.vc-frame:fullscreen .vp-hint { display: none; }
+.vc-frame:-webkit-full-screen .vp-hint { display: none; }
+.vc-frame:fullscreen .vp-row button { width: 44px; height: 44px; }
+.vc-frame:fullscreen .vp-row button svg { width: 26px; height: 26px; }
+.vc-frame:fullscreen .vp-time { font-size: .95rem; }
 @media (max-width: 900px) {
   .vgrid { grid-template-columns: 1fr; }
   .vcol:nth-child(2) { margin-top: 0; }
@@ -902,7 +920,6 @@ a.ed:hover .ed-arrow { background: var(--sunrise); }
 .times-logo { transition: transform .7s var(--ease-out); }
 .t-news:hover .times-logo { transform: translateY(-3px); }
 @media (max-width: 560px) { .venn { width: 96px; height: 52px; } }
-@media (prefers-reduced-motion: reduce) { .vc-play::before { animation: none; } }
 /* Touch screens have no hover: the venn settles into overlap once it scrolls into view */
 @media (hover: none) {
   .reveal-on .t-learn.in .venn .k, .reveal-on .t-learn.in .venn .d { transform: none; transition-delay: .4s; }

@@ -838,8 +838,6 @@ form .row.one { grid-template-columns: 1fr; }
 .vc-quote figcaption { border-top-color: rgba(75, 15, 46, .12); }
 .vc-quote figcaption b { color: var(--plum); }
 .vc-frame { background: var(--plum); }
-.vc-play { background: rgba(228, 106, 19, .94); }
-.vc-play:hover, .vc-video:hover .vc-play { background: var(--orange); }
 .vc-video figcaption { color: var(--slate); }
 
 /* Ways to partner: icon and heading at the top, text and button at the bottom.
