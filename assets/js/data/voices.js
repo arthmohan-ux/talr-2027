@@ -2,7 +2,7 @@
   Testimonials: written quotes and short videos. One source for /events and the TALR delegate page.
   Shown in three columns, filled in order (two cards each), so the mix stays as set here.
   Quote:  { type: "quote", quote, title (the person's role, no name), label (e.g. "TALR 2021") }
-  Video:  { type: "video", src (mp4), poster (jpg), label (what they talk about, read by screen readers) }
+  Video:  { type: "video", src (mp4), poster (jpg), label (the speaker: name, title, company; shown under the video) }
   Videos load only when someone presses play.
 */
 window.TAD_VOICES = [
@@ -14,21 +14,21 @@ window.TAD_VOICES = [
   },
   {
     "type": "video",
-    "src": "/assets/video/talr-voice-1.mp4",
-    "poster": "/assets/video/talr-voice-1.jpg",
-    "label": "GCC leader on what stood out from the room"
+    "src": "/assets/video/voice-anand-swaminathan.mp4",
+    "poster": "/assets/video/voice-anand-swaminathan.jpg",
+    "label": "Anand Swaminathan, Chief Strategy Officer, Sage"
   },
   {
     "type": "video",
-    "src": "/assets/video/talr-voice-2.mp4",
-    "poster": "/assets/video/talr-voice-2.jpg",
-    "label": "GCC leader on what they take back to India"
+    "src": "/assets/video/voice-krish-vitaldevara.mp4",
+    "poster": "/assets/video/voice-krish-vitaldevara.jpg",
+    "label": "Krish Vitaldevara, Chief Product Officer, Sage"
   },
   {
     "type": "video",
-    "src": "/assets/video/talr-voice-3.mp4",
-    "poster": "/assets/video/talr-voice-3.jpg",
-    "label": "Country Head and MD on the GCC leaders' roundtable"
+    "src": "/assets/video/voice-neelesh-sali.mp4",
+    "poster": "/assets/video/voice-neelesh-sali.jpg",
+    "label": "Neelesh Sali, Country Head and MD, Norstella"
   },
   {
     "type": "quote",
@@ -38,8 +38,8 @@ window.TAD_VOICES = [
   },
   {
     "type": "video",
-    "src": "/assets/video/talr-voice-4.mp4",
-    "poster": "/assets/video/talr-voice-4.jpg",
-    "label": "Country Head on the GCC leaders' roundtable"
+    "src": "/assets/video/voice-pancham-taneja.mp4",
+    "poster": "/assets/video/voice-pancham-taneja.jpg",
+    "label": "Pancham Taneja, Country Head, Delta Capita"
   }
 ];
