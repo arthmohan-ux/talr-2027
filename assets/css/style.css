@@ -1042,3 +1042,13 @@ a.ed:hover .ed-arrow { background: var(--sunrise); }
 [data-footer="dark"] .sf-col a:hover, [data-footer="dark"] .sf-legal a:hover { color: var(--sky); }
 [data-footer="dark"] .sf-li, [data-footer="dark"] .sf-ico, [data-footer="dark"] .sf-up { background: rgba(255, 255, 255, .08); color: #FFFFFF; box-shadow: inset 0 0 0 1px rgba(191, 212, 255, .28); }
 [data-footer="dark"] .sf-li:hover, [data-footer="dark"] .sf-ico:hover, [data-footer="dark"] .sf-up:hover { background: #FFFFFF; color: var(--midnight); }
+
+/* Turning photo tiles (.cf), shared by every header photo wall: home, /events, Community, TA Tech, Roundtables and TALR.
+   They lived in site.css until 20 Nov; the TALR pages do not load that file, so TALR tiles had no turn and both photos showed */
+.cf { position: relative; perspective: 1400px; }
+.cf-in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .9s var(--ease-out); }
+.cf.turned .cf-in { transform: rotateY(180deg); }
+.cf-a, .cf-b { position: absolute; inset: 0; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; background: var(--mist); }
+.cf-b { transform: rotateY(180deg); }
+.cf-a img, .cf-b img { width: 100%; height: 100%; object-fit: cover; }
+@keyframes cfIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }

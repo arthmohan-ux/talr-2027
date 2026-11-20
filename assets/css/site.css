@@ -390,12 +390,7 @@ body.ms { background: #FFFFFF; }
 /* The header runs edge to edge, starts right under the nav and fits one screen */
 .cm-head { padding-top: calc(env(safe-area-inset-top, 0px) + var(--nav-h)); }
 .cfg { --cg: 8px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr)); gap: var(--cg); height: calc(100svh - var(--nav-h) - env(safe-area-inset-top, 0px)); min-height: 520px; max-height: 1100px; }
-.cf { position: relative; perspective: 1400px; }
-.cf-in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .9s var(--ease-out); }
-.cf.turned .cf-in { transform: rotateY(180deg); }
-.cf-a, .cf-b { position: absolute; inset: 0; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; background: var(--mist); }
-.cf-b { transform: rotateY(180deg); }
-.cf-a img, .cf-b img { width: 100%; height: 100%; object-fit: cover; }
+/* Turning photo tiles (.cf) moved to style.css on 20 Nov, so the TALR pages, which do not load this file, get them too */
 .cft { display: flex; align-items: center; padding-inline: clamp(16px, 2.4vw, 40px); font-family: var(--display); font-weight: 600; font-size: clamp(2.8rem, min(7.6vw, 14.5svh), 9.4rem); line-height: .9; letter-spacing: -0.06em; color: var(--midnight); white-space: nowrap; }
 .cft span { display: inline-block; animation: rise 1.1s var(--ease-out) both; animation-delay: var(--d, 0ms); }
 .cft.hl2 { color: var(--accent); }
