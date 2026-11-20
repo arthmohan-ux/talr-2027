@@ -752,10 +752,19 @@
     var PLAY_I = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
     var sync = function () { if (!tog) return; var on = !v.paused; tog.innerHTML = on ? PAUSE_I : PLAY_I; tog.setAttribute('aria-label', on ? 'Pause the video' : 'Play the video'); };
     v.addEventListener('play', sync); v.addEventListener('pause', sync);
+    /* iPhone Safari only autoplays a video that is muted, inline and marked autoplay before its file is set */
+    v.muted = true; v.defaultMuted = true; v.playsInline = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+    var retry = function () { document.removeEventListener('touchstart', retry); document.removeEventListener('click', retry); if (!held && v.paused) v.play().catch(function () {}); };
     var start = function () {
       if (held) return;
-      if (!v.getAttribute('src')) { v.src = small && v.dataset.srcSm ? v.dataset.srcSm : v.dataset.src; }
-      v.play().catch(function () {});
+      if (!v.getAttribute('src')) {
+        v.setAttribute('autoplay', '');
+        v.src = small && v.dataset.srcSm ? v.dataset.srcSm : v.dataset.src;
+        v.load();
+      }
+      /* If the phone still refuses (some do until the first touch), the first tap anywhere starts it */
+      v.play().catch(function () { document.addEventListener('touchstart', retry, { passive: true }); document.addEventListener('click', retry); });
     };
     if (tog) tog.addEventListener('click', function () { if (v.paused) { held = false; start(); } else { held = true; v.pause(); } });
     if ('IntersectionObserver' in window) {
