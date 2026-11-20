@@ -37,6 +37,35 @@
   };
 })();
 
+/* Site forms: every main-site form posts to ONE Google Apps Script web app (backend/Site.gs), bound to one Google Sheet
+   with a tab per form: Join Requests, Partner Enquiries, Newsletter, Downloads. TALR keeps its own sheet (talr-forms.js).
+   Paste the web app's /exec URL into URL below once it's deployed. While it's blank, forms say so instead of pretending.
+   Every payload carries `form` (which tab), `page`, `placement` and the utm_* tags. */
+(function () {
+  var URL = 'https://script.google.com/macros/s/AKfycbxtWN2elgD98TfWYWuWkbqeL1QYA9ibahslffiNAEMCh9NNE8oCguxWkk4MvSYmM5RI/exec';
+  function utm() {
+    var o = {}, q = new URLSearchParams(location.search);
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(function (k) { if (q.get(k)) o[k] = q.get(k).slice(0, 120); });
+    return o;
+  }
+  window.TAD_FORMS = {
+    url: URL,
+    /* send(payload): resolves { success: true } or rejects. text/plain keeps it a simple request (no preflight);
+       if the response can't be read, a no-cors resend counts as sent */
+    send: function (p) {
+      if (!URL) return Promise.reject(new Error('not-connected'));
+      p = Object.assign({ page: location.pathname, referrer: document.referrer || '', sentAt: new Date().toISOString() }, utm(), p);
+      var body = JSON.stringify(p);
+      return fetch(URL, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body })
+        .then(function (r) { return r.json().catch(function () { return { success: true }; }); })
+        .catch(function () {
+          return fetch(URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body }).then(function () { return { success: true }; });
+        })
+        .then(function (d) { if (d && d.success === false) throw new Error(d.message || 'rejected'); return d; });
+    }
+  };
+})();
+
 (function () {
   'use strict';
 
@@ -143,33 +172,103 @@
     return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
   });
 
+  /* A photo path without an extension exists at -800.jpg and -1600.jpg */
+  function pic(p, big) { return !p ? '' : /\.\w{3,4}$/.test(p) ? p : p + (big ? '-1600.jpg' : '-800.jpg'); }
+  /* "YYYY-MM-DD" shows the day big, "YYYY-MM" the month, "YYYY" the year */
+  function edDate(e) {
+    var parts = e.date.split('-'), d = new Date(parts[0], (parts[1] || 1) - 1, parts[2] || 1);
+    var mon = d.toLocaleString('en-GB', { month: 'short' });
+    if (parts.length === 3) return { big: d.getDate(), small: mon + ' ' + parts[0], long: d.getDate() + ' ' + d.toLocaleString('en-GB', { month: 'long' }) + ' ' + parts[0], yr: false };
+    if (parts.length === 2) return { big: mon, small: parts[0], long: d.toLocaleString('en-GB', { month: 'long' }) + ' ' + parts[0], yr: true };
+    return { big: parts[0], small: e.edition || '', long: parts[0], yr: true };
+  }
+
+  /* An edition card. With `url` it's a link; otherwise it opens the edition modal */
   function editionRow(e, i) {
-    /* "YYYY-MM-DD" shows the day big; "YYYY" (date not confirmed) shows the year big */
-    var full = e.date.length > 4;
-    var d = new Date((full ? e.date : e.date + '-01-01') + 'T00:00:00');
-    var big = full ? d.getDate() : d.getFullYear();
-    var small = full ? d.toLocaleString('en-GB', { month: 'short' }) + ' ' + d.getFullYear() : (e.edition || '');
-    var title = e.title || (e.format + (e.city ? ' ' + e.city : ''));
-    var tag = e.url ? 'a' : 'article';
-    var href = e.url ? ' href="' + esc(e.url) + '"' : '';
-    var img = e.image ? '<img src="' + esc(e.image) + '" alt="' + esc(e.format + ' ' + d.getFullYear() + ', ' + title) + '" loading="lazy" decoding="async">' : '';
-    return '<' + tag + ' class="ed"' + href + ' data-reveal style="--d:' + ((i % 3) * 90) + 'ms">' +
-      '<div class="ed-date"><time datetime="' + esc(e.date) + '"><span class="d' + (full ? '' : ' d-yr') + '">' + big + '</span><span class="m">' + esc(small) + '</span></time></div>' +
-      '<div class="ed-photo"><div class="ed-img ph ph-' + ((i % 6) + 1) + '">' + img + '</div></div>' +
+    var dt = edDate(e), title = e.title || (e.format + (e.city ? ' ' + e.city : ''));
+    var k = editions.indexOf(e);
+    var open = e.url ? '<a class="ed" href="' + esc(e.url) + '"' : '<article class="ed ed-open" role="button" tabindex="0" data-ed="' + k + '" aria-haspopup="dialog" aria-label="' + esc(title + ', ' + dt.long + '. Open photos') + '"';
+    var img = e.image ? '<img src="' + esc(pic(e.image)) + '" alt="' + esc(e.format + ' ' + e.date.slice(0, 4) + ', ' + title) + '" loading="lazy" decoding="async">' : '';
+    var n = (e.gallery || []).length;
+    return open + ' data-reveal style="--d:' + ((i % 3) * 90) + 'ms">' +
+      '<div class="ed-date"><time datetime="' + esc(e.date) + '"><span class="d' + (dt.yr ? ' d-yr' : '') + '">' + esc(dt.big) + '</span><span class="m">' + esc(dt.small) + '</span></time></div>' +
+      '<div class="ed-photo"><div class="ed-img ph ph-' + ((i % 6) + 1) + '">' + (img || '<b class="ed-ph-t">' + esc(e.city || e.format) + '</b>') + (n > 1 ? '<span class="ed-n">' + n + ' photos</span>' : '') + '</div></div>' +
       '<div class="ed-body"><div class="ed-meta">' +
         '<span class="fmt fmt-' + (FORMAT_CLASS[e.format] || 'round') + '">' + esc(e.format) + '</span>' +
         (e.city ? '<span class="ed-city">' + esc(e.city) + '</span>' : '') +
-        (e.edition && full ? '<span class="ed-city">' + esc(e.edition) + '</span>' : '') +
-      '</div><h3>' + esc(title) + '</h3>' + (e.blurb ? '<p>' + esc(e.blurb) + '</p>' : '') + '</div>' +
-      (e.url ? '<span class="ed-arrow" aria-hidden="true">' + ARROW + '</span>' : '<span></span>') +
-      '</' + tag + '>';
+        (e.edition && !dt.yr ? '<span class="ed-city">' + esc(e.edition) + '</span>' : '') +
+      '</div><h3>' + esc(title) + '</h3>' + (e.theme ? '<p>' + esc(e.theme) + '</p>' : '') + '</div>' +
+      '<span class="ed-arrow" aria-hidden="true">' + (e.url ? ARROW : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>') + '</span>' +
+      (e.url ? '</a>' : '</article>');
   }
 
-  var latest = $('[data-editions]');
-  if (latest) {
-    var limit = +latest.dataset.limit || 3;
-    latest.innerHTML = editions.slice(0, limit).map(editionRow).join('');
+  /* The edition modal: the card's photo, the theme, then the edition's gallery. Escape, a click outside or the cross closes it */
+  var edm = null, edLast = null;
+  function closeEd() {
+    if (!edm || edm.hidden) return;
+    edm.classList.add('out');
+    setTimeout(function () { edm.hidden = true; edm.classList.remove('out'); }, 220);
+    document.body.style.overflow = '';
+    if (edLast && edLast.focus) edLast.focus();
   }
+  function openEd(e) {
+    edLast = document.activeElement;
+    if (!edm) {
+      edm = document.createElement('div');
+      edm.className = 'edm'; edm.hidden = true;
+      edm.setAttribute('role', 'dialog'); edm.setAttribute('aria-modal', 'true'); edm.setAttribute('aria-labelledby', 'edm-title');
+      document.body.appendChild(edm);
+      edm.addEventListener('mousedown', function (ev) { if (ev.target === edm) closeEd(); });
+      edm.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Escape') closeEd();
+        if (ev.key === 'Tab') {
+          var f = $$('button, a[href]', edm).filter(function (x) { return x.offsetParent; });
+          if (!f.length) return;
+          if (ev.shiftKey && document.activeElement === f[0]) { ev.preventDefault(); f[f.length - 1].focus(); }
+          else if (!ev.shiftKey && document.activeElement === f[f.length - 1]) { ev.preventDefault(); f[0].focus(); }
+        }
+      });
+    }
+    var dt = edDate(e), title = e.title || e.format, gal = e.gallery || (e.image ? [e.image] : []);
+    var facts = [e.venue, e.partner].filter(Boolean);
+    edm.innerHTML = '<div class="edm-box"><button class="edm-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+      (gal.length ? '<figure class="edm-main"><img src="' + esc(pic(gal[0], true)) + '" alt="' + esc(title) + '"></figure>' : '') +
+      '<div class="edm-body"><p class="edm-meta"><span class="fmt fmt-' + (FORMAT_CLASS[e.format] || 'round') + '">' + esc(e.format) + '</span>' +
+        (e.edition ? '<span>' + esc(e.edition) + '</span>' : '') + '<span>' + esc(dt.long) + '</span>' + (e.city ? '<span>' + esc(e.city) + '</span>' : '') + '</p>' +
+        '<h2 id="edm-title">' + esc(title) + '</h2>' + (e.theme ? '<p class="edm-theme">' + esc(e.theme) + '</p>' : '') +
+        (facts.length ? '<p class="edm-facts">' + facts.map(esc).join('<i aria-hidden="true"></i>') + '</p>' : '') + '</div>' +
+      (gal.length > 1 ? '<div class="edm-gal" role="list" aria-label="Photos from this edition">' + gal.map(function (g, j) {
+        return '<button type="button" role="listitem" class="edm-t" data-i="' + j + '"' + (j ? '' : ' aria-current="true"') + ' aria-label="Show photo ' + (j + 1) + ' of ' + gal.length + '"><img src="' + esc(pic(g)) + '" alt="" loading="lazy" decoding="async"></button>';
+      }).join('') + '</div>' : '') + '</div>';
+    $('.edm-x', edm).addEventListener('click', closeEd);
+    var main = $('.edm-main img', edm);
+    $$('.edm-t', edm).forEach(function (t) {
+      t.addEventListener('click', function () {
+        main.src = pic(gal[+t.dataset.i], true);
+        $$('.edm-t', edm).forEach(function (o) { o.removeAttribute('aria-current'); });
+        t.setAttribute('aria-current', 'true');
+        $('.edm-main', edm).scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      });
+    });
+    edm.hidden = false;
+    document.body.style.overflow = 'hidden';
+    $('.edm-box', edm).scrollTop = 0;
+    setTimeout(function () { $('.edm-x', edm).focus({ preventScroll: true }); }, 30);
+  }
+  document.addEventListener('click', function (ev) {
+    var c = ev.target.closest('[data-ed]');
+    if (c && editions[+c.dataset.ed]) openEd(editions[+c.dataset.ed]);
+  });
+  document.addEventListener('keydown', function (ev) {
+    var c = ev.target.closest && ev.target.closest('[data-ed]');
+    if (c && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); openEd(editions[+c.dataset.ed]); }
+  });
+
+  /* [data-editions]: the latest N (data-limit, "all" for every one), optionally one format (data-format) */
+  $$('[data-editions]').forEach(function (box) {
+    var f = box.dataset.format, lim = box.dataset.limit === 'all' ? 999 : (+box.dataset.limit || 3);
+    box.innerHTML = editions.filter(function (e) { return !f || e.format === f; }).slice(0, lim).map(editionRow).join('');
+  });
 
   var all = $('[data-editions-all]');
   if (all) {
@@ -303,6 +402,54 @@
       vall.forEach(function (f) { vio.observe(f); });
     }
   }
+
+  /* Roundtables, Six cities: hover (or focus) a city in the list or near its dot on the map; the dot lights up and a small
+     card beside it lists what has happened there. Nothing is a link. */
+  $$('[data-city-map]').forEach(function (box) {
+    var pop = $('[data-pop]', box), wrap = pop.parentNode, svg = $('svg', wrap), hideT = null, fmt = box.dataset.format;
+    var list = function (c) { return editions.filter(function (e) { return e.city === c && (!fmt || e.format === fmt); }); };
+    $$('.rtc-list [data-city]', box).forEach(function (li) {
+      var n = list(li.dataset.city).length;
+      $('[data-city-n]', li).textContent = n ? n + (n === 1 ? ' edition' : ' editions') : 'No editions on record yet';
+    });
+    var show = function (c) {
+      clearTimeout(hideT);
+      $$('[data-city]', box).forEach(function (el) { el.classList.toggle('on', el.dataset.city === c); });
+      var g = $('g[data-city="' + c + '"]', svg), dot = g && $('.mp-dot', g);
+      if (!dot) return;
+      var items = list(c);
+      pop.innerHTML = '<b>' + esc(c) + '</b>' + (items.length ? '<ul>' + items.slice(0, 6).map(function (e) {
+        var dt = edDate(e);
+        return '<li><span>' + esc(e.format) + ' · ' + esc(dt.long) + '</span>' + esc(e.title || e.format) + '</li>';
+      }).join('') + '</ul>' + (items.length > 6 ? '<p>And ' + (items.length - 6) + ' more.</p>' : '') : '<p>No editions on record here yet.</p>');
+      var r = dot.getBoundingClientRect(), w = wrap.getBoundingClientRect();
+      var x = r.left + r.width / 2 - w.left, y = r.top + r.height / 2 - w.top;
+      pop.hidden = false;
+      var left = x + 26, right = x - 26 - pop.offsetWidth;
+      pop.style.left = (left + pop.offsetWidth < w.width || right < 0 ? left : right) + 'px';
+      pop.style.top = Math.max(0, Math.min(w.height - pop.offsetHeight, y - pop.offsetHeight / 2)) + 'px';
+    };
+    var hide = function () { hideT = setTimeout(function () { pop.hidden = true; $$('[data-city]', box).forEach(function (el) { el.classList.remove('on'); }); }, 120); };
+    $$('[data-city]', box).forEach(function (el) {
+      el.addEventListener('mouseenter', function () { show(el.dataset.city); });
+      el.addEventListener('mouseleave', hide);
+      el.addEventListener('focus', function () { show(el.dataset.city); });
+      el.addEventListener('blur', hide);
+      el.addEventListener('click', function () { show(el.dataset.city); });
+    });
+  });
+
+  /* About us, the six principles: hover, focus or click a letter to open it */
+  $$('[data-tenets]').forEach(function (box) {
+    var items = $$('.tenet', box);
+    var open = function (it) { items.forEach(function (x) { var on = x === it; x.classList.toggle('is-open', on); $('.tenet-head', x).setAttribute('aria-expanded', String(on)); }); };
+    items.forEach(function (it) {
+      var h = $('.tenet-head', it);
+      h.addEventListener('click', function () { open(it); });
+      h.addEventListener('focus', function () { open(it); });
+      it.addEventListener('mouseenter', function () { if (window.matchMedia('(hover: hover) and (min-width: 1001px)').matches) open(it); });
+    });
+  });
 
   /* Tabs ([data-tabs]): role tabs on the homepage. Arrow keys move between tabs; the orange ink slides under the active one */
   $$('[data-tabs]').forEach(function (box) {
@@ -564,7 +711,115 @@
     requestAnimationFrame(frame);
   }
 
-  /* Newsletter. Set data-endpoint on the form (Brevo or your own handler) to go live.
+  /* Header photos (home, /events, Community, TA Tech, Roundtables, TALR; moved here from pages.js so TALR gets it too): every 1.75 seconds a random few tiles turn to a random photo
+     that isn't already showing. Only tiles on screen turn, and nothing runs while the header is out of view */
+  $$('[data-collage-flip]').forEach(function (flip) {
+    var pool = (flip.dataset.pool || '').split('|').filter(Boolean);
+    var tiles = $$('.cf', flip), max = +flip.dataset.max || 5, seen = true;
+    if (reduce || !tiles.length || pool.length <= tiles.length) return;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { seen = en[0].isIntersecting; }).observe(flip);
+    var front = function (t) { return $(t.classList.contains('turned') ? '.cf-b img' : '.cf-a img', t); };
+    var busy = false;
+    setInterval(function () {
+      if (busy || !seen || document.hidden) return;
+      var live = tiles.filter(function (t) { return t.offsetWidth > 0; });
+      if (!live.length) return;
+      busy = true;
+      var showing = live.map(function (t) { return front(t).getAttribute('src'); });
+      var spare = pool.filter(function (src) { return showing.indexOf(src) < 0; }).sort(function () { return Math.random() - .5; });
+      var count = 1 + Math.floor(Math.random() * Math.min(max, live.length));
+      live.sort(function () { return Math.random() - .5; }).slice(0, count).forEach(function (t, i) {
+        var src = spare[i];
+        if (!src) return;
+        setTimeout(function () {
+          var back = $(t.classList.contains('turned') ? '.cf-a img' : '.cf-b img', t);
+          var go = function () { back.onload = back.onerror = null; t.classList.toggle('turned'); };
+          if (back.getAttribute('src') === src && back.complete) { go(); return; }
+          back.onload = go; back.onerror = go;
+          back.src = src;
+        }, i * 160);
+      });
+      setTimeout(function () { busy = false; }, 1200);
+    }, 1750);
+  });
+
+  /* Background videos ([data-bgvideo]: the /events header). The 720p file on phones and small screens, 1080p otherwise;
+     plays muted while on screen, pauses off screen; reduced motion keeps the poster. [data-bgvideo-toggle] pauses and plays */
+  $$('[data-bgvideo]').forEach(function (v) {
+    var small = window.matchMedia('(max-width: 900px)').matches || (navigator.connection && navigator.connection.saveData);
+    var tog = v.parentNode.querySelector('[data-bgvideo-toggle]'), held = reduce;
+    var PAUSE_I = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>';
+    var PLAY_I = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
+    var sync = function () { if (!tog) return; var on = !v.paused; tog.innerHTML = on ? PAUSE_I : PLAY_I; tog.setAttribute('aria-label', on ? 'Pause the video' : 'Play the video'); };
+    v.addEventListener('play', sync); v.addEventListener('pause', sync);
+    var start = function () {
+      if (held) return;
+      if (!v.getAttribute('src')) { v.src = small && v.dataset.srcSm ? v.dataset.srcSm : v.dataset.src; }
+      v.play().catch(function () {});
+    };
+    if (tog) tog.addEventListener('click', function () { if (v.paused) { held = false; start(); } else { held = true; v.pause(); } });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { if (es[0].isIntersecting) start(); else v.pause(); }, { threshold: 0.2 }).observe(v);
+    } else start();
+    sync();
+  });
+
+  /* Downloads ask for an email first ([data-gate] links: every report PDF). The email is kept on this device, so the
+     next download starts straight away (and is still logged). Each download is a row in the Downloads tab. */
+  var GATE_KEY = 'tadGateEmail';
+  var gateGet = function () { try { return localStorage.getItem(GATE_KEY) || ''; } catch (e) { return ''; } };
+  var gateSet = function (v) { try { localStorage.setItem(GATE_KEY, v); } catch (e) {} };
+  var gateLog = function (email, a) {
+    if (window.TAD_FORMS) window.TAD_FORMS.send({ form: 'download', email: email, file: a.getAttribute('data-gate') || a.getAttribute('href'), title: a.getAttribute('data-title') || '', placement: 'gate' }).catch(function () {});
+  };
+  var gateGo = function (a) {
+    var t = document.createElement('a');
+    t.href = a.getAttribute('href'); t.download = ''; t.rel = 'noopener';
+    document.body.appendChild(t); t.click(); t.remove();
+  };
+  var gm = null, gLast = null, gLink = null;
+  function gateClose() { if (!gm || gm.hidden) return; gm.hidden = true; document.body.style.overflow = ''; if (gLast && gLast.focus) gLast.focus(); }
+  function gateOpen(a) {
+    gLast = document.activeElement; gLink = a;
+    if (!gm) {
+      gm = document.createElement('div');
+      gm.className = 'gate'; gm.hidden = true;
+      gm.setAttribute('role', 'dialog'); gm.setAttribute('aria-modal', 'true'); gm.setAttribute('aria-labelledby', 'gate-title');
+      gm.innerHTML = '<form class="gate-box" novalidate><button class="gate-x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+        '<h2 id="gate-title">Where should we <span class="hl">send updates?</span></h2>' +
+        '<p class="gate-what"></p>' +
+        '<label for="gate-email">Work email</label><input id="gate-email" type="email" autocomplete="email" placeholder="name@company.com" required>' +
+        '<input class="hp" type="text" name="website_url" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+        '<p class="gate-msg" role="alert"></p>' +
+        '<button class="btn btn-primary" type="submit">Download the report</button>' +
+        '<p class="gate-small">We use your email to share new TA Dialogues research. No spam; unsubscribe any time. <a href="/privacy-policy" target="_blank" rel="noopener">Privacy policy</a>.</p></form>';
+      document.body.appendChild(gm);
+      $('.gate-x', gm).addEventListener('click', gateClose);
+      gm.addEventListener('mousedown', function (e) { if (e.target === gm) gateClose(); });
+      gm.addEventListener('keydown', function (e) { if (e.key === 'Escape') gateClose(); });
+      $('form', gm).addEventListener('submit', function (e) {
+        e.preventDefault();
+        var inp = $('#gate-email', gm), msg = $('.gate-msg', gm), v = inp.value.trim();
+        if ($('.hp', gm).value) { gateClose(); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) { msg.textContent = 'Enter a valid email address.'; inp.focus(); return; }
+        gateSet(v); gateLog(v, gLink); gateClose(); gateGo(gLink);
+      });
+    }
+    $('.gate-what', gm).textContent = (a.getAttribute('data-title') ? a.getAttribute('data-title').replace(/[.?!]+$/, '') + '. ' : '') + 'Free. Tell us where to reach you and the download starts.';
+    $('.gate-msg', gm).textContent = '';
+    gm.hidden = false; document.body.style.overflow = 'hidden';
+    setTimeout(function () { $('#gate-email', gm).focus(); }, 30);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[data-gate]');
+    if (!a) return;
+    e.preventDefault();
+    var known = gateGet();
+    if (known) { gateLog(known, a); gateGo(a); return; }
+    gateOpen(a);
+  });
+
+  /* Newsletter: posts to the site's forms sheet (TAD_FORMS, Newsletter tab).
      Turnstile loads on the first tap into the field and its token goes with the email as cfToken. */
   $$('[data-newsletter]').forEach(function (form) {
     var msg = form.parentElement.querySelector('.nl-msg');
@@ -583,8 +838,7 @@
         input.focus();
         return;
       }
-      var endpoint = form.dataset.endpoint;
-      if (!endpoint) {
+      if (!window.TAD_FORMS || !window.TAD_FORMS.url) {
         msg.textContent = 'Signups open soon. This form isn’t connected yet.';
         return;
       }
@@ -596,12 +850,7 @@
         return;
       }
       msg.textContent = 'Subscribing…';
-      fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: input.value, cfToken: token })
-      }).then(function (res) {
-        if (!res.ok) throw new Error('bad status');
+      window.TAD_FORMS.send({ form: 'newsletter', email: input.value, placement: form.classList.contains('rail-form') ? 'rail' : 'band', cfToken: token }).then(function () {
         msg.textContent = 'You’re in. Look out for the next issue.';
         form.reset();
         if (ts) ts.reset();
@@ -663,8 +912,8 @@
     partner: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M9 7V4.5h6V7M3 12.5h18"/></svg>'
   };
   function arm(tab) {
-    var head = document.querySelector('.hh, .cm-head, .thero, .pgh, .page-head');
-    var forms = Array.prototype.slice.call(document.querySelectorAll('#join, .enq, [data-join-form], [data-talr-form]'));
+    var head = document.querySelector('.hh, .cm-head, .thero, .pgh, .page-head, .abh, .rth, .smh, .tth, .evh, .tlh');
+    var forms = Array.prototype.slice.call(document.querySelectorAll('#join, .enq, [data-join-form], [data-talr-form], [data-contact-form]'));
     var past = !head, near = [];
     function set() {
       var on = past && !near.some(Boolean);

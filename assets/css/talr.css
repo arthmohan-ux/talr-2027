@@ -991,3 +991,129 @@ form .row.one { grid-template-columns: 1fr; }
   .tnav .nav-tad img { height: 24px; }
   .tnav .brand img { height: 30px; }
 }
+
+/* ===== 20 Nov: the hero, full width. A wall of TALR photos in plum; the lockup, theme, date, countdown and buttons on
+   the left; the day's agenda in a panel on the right with the seal on its corner. Same idea as TA Tech and Roundtables ===== */
+.tlh { position: relative; display: flex; min-height: clamp(660px, calc(100svh - env(safe-area-inset-top, 0px)), 1080px); padding-top: calc(env(safe-area-inset-top, 0px) + var(--nav-h)); overflow: hidden; background: var(--plum); color: var(--champ); }
+.tlh-wall { position: absolute; inset: var(--nav-h) 0 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 5px; }
+.tlh-wall .cf { margin: 0; }
+.tlh-wall .cf-a, .tlh-wall .cf-b { background: var(--wine); }
+.tlh-wall img { filter: saturate(.85) contrast(1.05); }
+.tlh-veil { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(95deg, rgba(42, 8, 25, .97) 0%, rgba(58, 10, 34, .92) 38%, rgba(75, 15, 46, .62) 66%, rgba(75, 15, 46, .48) 100%),
+              linear-gradient(0deg, rgba(42, 8, 25, .7), rgba(42, 8, 25, 0) 40%); }
+.tlh-veil::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 60% at 18% 40%, rgba(228, 106, 19, .16), transparent 70%); }
+.tlh-in { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(28px, 5vw, 88px); align-items: center; width: 100%; padding-block: clamp(32px, 5svh, 72px); }
+.tlh-lock { display: flex; flex-direction: column; align-items: flex-start; width: min(440px, 100%); container-type: inline-size; }
+.tlh-tad { width: 44cqw; height: auto; }
+.tlh-p { margin: 2.2cqw 0 1.4cqw; font-family: var(--display); font-weight: 700; font-size: 3.6cqw; line-height: 1; color: var(--blush); }
+.tlh-talr { width: 100%; height: auto; }
+.tlh h1 { margin-top: clamp(22px, 3.4svh, 40px); font-family: var(--serif); font-weight: 600; font-size: clamp(3rem, min(6vw, 9.6svh), 6.4rem); line-height: .95; letter-spacing: -0.01em; color: var(--champ); max-width: 14ch; }
+.tlh h1 em { font-style: italic; color: var(--orange); }
+.tlh .when { margin-top: 18px; color: rgba(249, 231, 218, .8); }
+.tlh .when strong { color: var(--champ); }
+.tlh-theme { margin-top: clamp(18px, 2.6svh, 28px); padding-top: clamp(14px, 2svh, 20px); border-top: 1px solid rgba(244, 199, 184, .25); max-width: 34rem; }
+.tlh .th-k { color: rgba(244, 199, 184, .8); }
+.tlh .th-t { color: var(--champ); font-size: clamp(1.6rem, 2.6vw, 2.3rem); }
+.tlh .th-t em { color: var(--orange); }
+.tlh-tag { margin: 12px 0 0; max-width: 46ch; color: rgba(249, 231, 218, .78); line-height: 1.55; }
+.tlh .countdown { margin-top: clamp(20px, 3svh, 32px); }
+.tlh .countdown div { border-left-color: rgba(244, 199, 184, .25); }
+.tlh .countdown b { color: var(--champ); }
+.tlh .countdown small { color: rgba(244, 199, 184, .75); }
+.tlh .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(22px, 3.4svh, 36px); }
+.tlh-ghost { background: transparent; color: var(--champ); border: 1px solid rgba(249, 231, 218, .55); }
+.tlh-ghost:hover { background: rgba(249, 231, 218, .1); border-color: var(--champ); color: var(--champ); }
+.tlh-day { position: relative; padding: clamp(22px, 2.6vw, 34px); background: rgba(42, 8, 25, .62); border: 1px solid rgba(244, 199, 184, .24); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .6); }
+.tlh-seal { position: absolute; top: -46px; right: -30px; width: clamp(96px, 9vw, 132px); filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .45)); }
+.tlh-day-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-right: 64px; }
+.tlh-day h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.8rem, 2.4vw, 2.3rem); color: var(--champ); }
+.tlh-day h2 em { font-style: italic; color: var(--orange); }
+.tlh-arc { display: flex; gap: 6px; margin: 0; }
+.tlh-arc span { padding: 3px 8px; border: 1px solid rgba(244, 199, 184, .35); font-size: .78rem; font-weight: 600; color: var(--blush); }
+.tlh-ag { list-style: none; margin: 16px 0 0; padding: 0; border-top: 1px solid rgba(244, 199, 184, .22); }
+.tlh-ag li { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid rgba(244, 199, 184, .14); font-size: .95rem; line-height: 1.35; }
+.tlh-ag b { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--orange); }
+.tlh-ag span { color: var(--champ); }
+.tlh-ag .k-break span { color: rgba(249, 231, 218, .62); }
+.tlh-ag .k-panel span { font-weight: 600; }
+.tlh-ag i { font-style: italic; font-family: var(--serif); font-size: 1.02rem; color: var(--blush); }
+.tlh-more { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 600; color: var(--champ); text-decoration: none; }
+.tlh-more svg { width: 18px; height: 18px; transition: transform .35s var(--ease-out); }
+.tlh-more:hover { color: var(--orange); }
+.tlh-more:hover svg { transform: translateX(4px); }
+@media (max-width: 980px) {
+  .tlh { min-height: 0; }
+  .tlh-in { grid-template-columns: 1fr; padding-block: 28px 40px; }
+  .tlh-wall { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); }
+  .tlh-veil { background: linear-gradient(180deg, rgba(42, 8, 25, .8), rgba(42, 8, 25, .93) 40%, rgba(42, 8, 25, .97)); }
+  .tlh-seal { top: -40px; right: 10px; width: 92px; }
+  .tlh h1 { font-size: clamp(2.6rem, 11vw, 3.6rem); }
+}
+@media (max-width: 560px) {
+  .tlh-ag li { grid-template-columns: 44px minmax(0, 1fr); }
+  .tlh-ag i { display: none; }
+  .tlh-day-h { flex-direction: column; padding-right: 72px; }
+}
+/* The partner hero headline is a sentence, not a title: smaller so the buttons stay above the fold */
+.tlh #p-title { font-size: clamp(2.3rem, min(4.2vw, 7svh), 4.3rem); line-height: 1; max-width: 17ch; }
+@media (max-width: 980px) { .tlh #p-title { font-size: clamp(2.1rem, 8.6vw, 2.9rem); } }
+
+/* ===== 20 Nov, revised: no agenda in the hero; photos clearer (dark plum on the left, lighter to the right);
+   everything fits one screen; photos cross-fade instead of turning over (smoother on big, tinted photos) ===== */
+.tlh { height: calc(100svh - env(safe-area-inset-top, 0px)); min-height: 560px; max-height: 1100px; }
+.tlh-wall img { filter: none; }
+.tlh-veil { background: linear-gradient(90deg, rgba(42, 8, 25, .93) 0%, rgba(55, 10, 32, .84) 30%, rgba(75, 15, 46, .5) 56%, rgba(75, 15, 46, .2) 80%, rgba(75, 15, 46, .08) 100%),
+                         linear-gradient(0deg, rgba(42, 8, 25, .45), rgba(42, 8, 25, 0) 30%); }
+.tlh-veil::after { background: radial-gradient(ellipse 40% 55% at 16% 45%, rgba(228, 106, 19, .12), transparent 70%); }
+/* Cross-fade: both faces sit flat; the turned class fades the back face in */
+.tlh-wall .cf { perspective: none; }
+.tlh-wall .cf-in { transform: none !important; transition: none; }
+.tlh-wall .cf-a, .tlh-wall .cf-b { transform: none; -webkit-backface-visibility: visible; backface-visibility: visible; transition: opacity 1.4s var(--ease); will-change: opacity; }
+.tlh-wall .cf-b { opacity: 0; }
+.tlh-wall .cf.turned .cf-a { opacity: 0; }
+.tlh-wall .cf.turned .cf-b { opacity: 1; }
+.tlh-in { grid-template-columns: minmax(0, 1fr); align-items: center; height: 100%; padding-block: clamp(14px, 3svh, 48px); }
+.tlh-copy { max-width: min(720px, 56vw); }
+.tlh-lock { width: min(420px, 38svh * 1.4, 100%); }
+.tlh h1 { margin-top: clamp(10px, 2.4svh, 34px); font-size: clamp(2.3rem, min(5.4vw, 8.4svh), 6rem); }
+.tlh #p-title { font-size: clamp(2rem, min(4vw, 6.2svh), 4.2rem); }
+.tlh .when { margin-top: clamp(8px, 1.6svh, 18px); }
+.tlh-theme { margin-top: clamp(10px, 2svh, 26px); padding-top: clamp(8px, 1.6svh, 18px); }
+.tlh .th-t { font-size: clamp(1.35rem, min(2.4vw, 4.2svh), 2.3rem); }
+.tlh-tag { margin-top: clamp(6px, 1.2svh, 12px); }
+.tlh-act { display: flex; flex-wrap: wrap; align-items: flex-end; gap: clamp(14px, 2svh, 24px) clamp(24px, 3vw, 44px); margin-top: clamp(14px, 3svh, 36px); }
+.tlh-act .countdown { margin: 0; }
+.tlh-act .ctas { margin: 0; }
+.tlh .countdown b { font-size: clamp(1.8rem, min(3.2vw, 5.6svh), 3.2rem); }
+.tlh-seal { position: absolute; top: auto; right: clamp(20px, 4vw, 64px); bottom: clamp(20px, 5svh, 56px); z-index: 2; width: clamp(110px, min(11vw, 20svh), 170px); filter: drop-shadow(0 16px 26px rgba(0, 0, 0, .45)); }
+@media (max-height: 720px) and (min-width: 981px) { .tlh-tag { display: none; } }
+@media (max-width: 980px) {
+  .tlh { height: auto; min-height: 0; max-height: none; }
+  .tlh-copy { max-width: none; }
+  .tlh-veil { background: linear-gradient(180deg, rgba(42, 8, 25, .62), rgba(42, 8, 25, .86) 45%, rgba(42, 8, 25, .94)); }
+  .tlh-seal { right: 16px; top: calc(var(--nav-h) + 14px); bottom: auto; width: 84px; }
+  .tlh-act { flex-direction: column; align-items: flex-start; }
+}
+/* Cross-fade without a dip: the incoming photo fades in on top; the outgoing one stays solid underneath */
+.tlh-wall .cf-a, .tlh-wall .cf-b { opacity: 1 !important; transition: none; z-index: 1; }
+.tlh-wall .cf:not(.turned) .cf-a, .tlh-wall .cf.turned .cf-b { z-index: 2; animation: tlhIn 1.3s var(--ease) both; }
+@keyframes tlhIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .tlh-wall .cf-a, .tlh-wall .cf-b { animation: none !important; } }
+/* One photo at a time, full bleed: the incoming photo fades in on top with a slow zoom */
+.tlh-show { position: absolute; inset: var(--nav-h) 0 0; overflow: hidden; background: var(--plum); }
+.tlh-s { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 40%; opacity: 0; z-index: 1; transform: scale(1.02); transition: opacity 1.6s var(--ease); }
+.tlh-s.is-top { z-index: 2; }
+.tlh-s.is-on { opacity: 1; animation: tlhZoom 9s cubic-bezier(.2, .6, .3, 1) both; }
+@keyframes tlhZoom { from { transform: scale(1.02); } to { transform: scale(1.12); } }
+@media (prefers-reduced-motion: reduce) { .tlh-s.is-on { animation: none; } }
+@media (max-width: 980px) { .tlh-s { object-position: 50% 40%; } }
+.tlh-show { z-index: 0; }
+.tlh-veil { z-index: 1; }
+/* The photo grid, same build as the Roundtables header (4 x 3, tiles turn over); plain .cf behaviour, no overrides */
+.tlh-grid { position: absolute; inset: var(--nav-h) 0 0; z-index: 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 6px; background: var(--plum); }
+.tlh-grid .cf { margin: 0; }
+.tlh-grid .cf-a, .tlh-grid .cf-b { background: var(--wine); }
+@media (max-width: 980px) {
+  .tlh-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); }
+}

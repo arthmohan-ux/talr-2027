@@ -409,4 +409,42 @@
     }, { rootMargin: '-45% 0px -50% 0px' });
     Object.keys(map).forEach(function (id) { sio.observe(document.getElementById(id)); });
   }
+
+  /* The hero's "day" panel: every session from TALR.agenda, time and title, the arc word on the three big sessions */
+  var hag = document.querySelector('[data-hero-agenda]');
+  if (hag && T.agenda && T.agenda.sessions) {
+    hag.innerHTML = T.agenda.sessions.map(function (x) {
+      var t = String(x.time || '').replace(/\s?(AM|PM)$/i, '');
+      return '<li class="k-' + esc(x.kind || 'session') + '"><b>' + esc(t) + '</b><span>' + esc(x.title) + '</span>' + (x.code ? '<i>' + esc(x.code.charAt(0) + x.code.slice(1).toLowerCase()) + '</i>' : '') + '</li>';
+    }).join('');
+  }
+
+  /* The hero photo: one full-bleed TALR photo at a time. Every 6 seconds the next one loads into the hidden layer, then fades in
+     on top (the current one stays solid underneath, so there is never a gap) with a slow zoom. Pauses off screen and in a
+     background tab; reduced motion keeps the first photo still */
+  var show = document.querySelector('[data-tlh-show]');
+  if (show) {
+    var list = (show.getAttribute('data-pool') || '').split('|').filter(Boolean), layers = show.querySelectorAll('.tlh-s');
+    var cur = 0, at = 0, busy = false, seen = true;
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { seen = en[0].isIntersecting; }).observe(show);
+    var next = function () {
+      if (busy || !seen || document.hidden || list.length < 2) return;
+      busy = true;
+      at = (at + 1) % list.length;
+      var top = layers[cur], under = layers[1 - cur];
+      var go = function () {
+        under.onload = under.onerror = null;
+        top.classList.remove('is-top');
+        under.classList.add('is-top');
+        void under.offsetWidth;
+        under.classList.add('is-on');
+        setTimeout(function () { top.classList.remove('is-on'); cur = 1 - cur; busy = false; }, 1700);
+      };
+      under.classList.remove('is-on');
+      if (under.getAttribute('src') === list[at] && under.complete) go();
+      else { under.onload = go; under.onerror = function () { busy = false; }; under.src = list[at]; }
+    };
+    if (!still) setInterval(next, 6000);
+  }
 })();

@@ -132,6 +132,51 @@ window.TALR = {
         "image": "/assets/img/talr/journey/talr-2025.webp"
       },
       {
+        "edition": "Edition 7",
+        "year": "2024",
+        "date": "2 February 2024",
+        "venue": "Prestige Golfshire, Bengaluru",
+        "title": "Reimagining TA for 2024",
+        "theme": "Global uncertainty, generative AI and the new social construct",
+        "body": "100+ C-suite, business and TA leaders on Bengaluru's best golf course: a CEO panel on reimagining TA strategy, Kashaya with Kaveri, and Tee Time Talk on the greens.",
+        "facts": [
+          "Golf Edition",
+          "CEO panel",
+          "450+ registrations"
+        ],
+        "image": "/assets/img/photos/hq/talr-2024/01-1600.jpg"
+      },
+      {
+        "edition": "Edition 6",
+        "year": "2023",
+        "date": "20 January 2023",
+        "venue": "The Tamarind Tree, Bengaluru",
+        "title": "The Nature and Wellness Retreat",
+        "theme": "Wellness, and the TA year ahead",
+        "body": "150+ delegates at a heritage retreat: two panels, an address on purpose-led TA, eight industry roundtables and sound healing.",
+        "facts": [
+          "150+ delegates",
+          "8 industry roundtables",
+          "Wellness edition"
+        ],
+        "image": "/assets/img/photos/hq/talr-2023/01-1600.jpg"
+      },
+      {
+        "edition": "Edition 5",
+        "year": "2022",
+        "date": "2022",
+        "venue": "Prestige Golfshire, Bengaluru",
+        "title": "The Golf Retreat",
+        "theme": "Pandemic, Great Resignation and the New Normal",
+        "body": "60+ TA leaders and eight MDs and CEOs hit refresh on Talent Acquisition, with Fire @ the CEO: TA Wants to Know.",
+        "facts": [
+          "Golf Edition",
+          "8 MDs and CEOs",
+          "Fire @ the CEO"
+        ],
+        "image": "/assets/img/photos/hq/talr-2022/04-1600.jpg"
+      },
+      {
         "edition": "Edition 4",
         "year": "2021",
         "date": "29 January 2021",
